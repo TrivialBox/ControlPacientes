@@ -4,31 +4,30 @@ _Todo es una pregunta._
 
 ## Preguntas por defecto y obligatorias
 
-> -   Cédula
-> -   Nombre
-> -   Dirección
-> -   Teléfono
-> -   Contacto en caso de accidente
-> -   Instrucción (revisar a qué hace referencia)
-> -   Fecha de nacimiento
-> -   Sexo
-> -   Tipo (revisar a qué hace referencia)
+> -   Cédula.
+> -   Nombre.
+> -   Dirección.
+> -   Teléfono.
+> -   Contacto en caso de accidente.
+> -   Instrucción (revisar a qué hace referencia).
+> -   Fecha de nacimiento.
+> -   Sexo.
+> -   Tipo (revisar a qué hace referencia).
 
 ## Conjunto de preguntas
 
 Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta). Las cuales pueden ser:
 
-> -   Simple (pregunta/texto)
 > -   Numérica (respuesta sólo admite rango de números).
-> -   Texto
-> -   Booleana (si/no)
-> -   Opción múltiple (checklist)
-> -   Opcion única
+> -   Texto.
+> -   Booleana (si/no).
+> -   Opción múltiple (checklist).
+> -   Opcion única.
 
 ### Datos del conjunto
 
-> -   ID de categoría (o conjunto)
-> -   Nombre de la categoría (o conjunto)
+> -   ID de categoría (o conjunto).
+> -   Nombre de la categoría (o conjunto).
 
 ### Condiciones adicionales
 
