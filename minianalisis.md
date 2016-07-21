@@ -17,12 +17,13 @@ _Todo es una pregunta._
 ## Conjunto de preguntas
 
 :exclamation: ¿Una encuesta está compuesta de conjuntos o un conjunto es una encuesta?
+
 Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta). Las cuales pueden ser:
 
-> -   Textual.
-> -   Numérica (respuesta sólo admite rango de números).
-> -   Booleana (si/no).
-> -   Opción múltiple (máximo número de selecciones).
+> -   [Textual](#pregunta-textual).
+> -   [Numérica](#pregunta-numérica) (respuesta sólo admite rango de números).
+> -   [Booleana](#pregunta-booleana) (si/no).
+> -   [Opción múltiple](#pregunta-de-opción-múltiple) (máximo número de selecciones).
 
 ### Datos del conjunto
 
@@ -45,7 +46,7 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 
 > :exclamation: TODO
 
-#### Pregunta opción múltiple
+#### Pregunta de opción múltiple
 
 > :exclamation: TODO
 
