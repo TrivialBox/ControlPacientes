@@ -1,5 +1,6 @@
 package com.trivialbox.controlpacientes.srv;
 
+import com.trivialbox.controlpacientes.srv.exceptions.PatronException;
 import com.trivialbox.controlpacientes.srv.exceptions.NumeroMaximoDeCaracteresException;
 import com.trivialbox.controlpacientes.srv.exceptions.PatronYaDefinidoException;
 import java.util.regex.Pattern;
@@ -59,9 +60,5 @@ public class PreguntaTextual extends Pregunta<String, String> {
     @Override
     protected boolean preguntaRespondida() {
         return respuesta != null;
-    }
-
-    private boolean numeroDeCaracteresValidos() {
-        return numMaxCaracteres > 0 && respuesta.length() > numMaxCaracteres;
     }
 }
