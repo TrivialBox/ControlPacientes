@@ -2,10 +2,7 @@ package com.trivialbox.controlpacientes.srv.objectos;
 
 import com.trivialbox.controlpacientes.srv.exceptions.PreguntaBooleanaNoRespondida;
 
-/**
- *
- * @author root
- */
+
 public class PreguntaBooleana extends Pregunta<Boolean, Boolean>{
     private Boolean respuesta = null;
     
