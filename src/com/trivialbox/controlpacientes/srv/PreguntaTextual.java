@@ -53,12 +53,17 @@ public class PreguntaTextual extends Pregunta<String, String> {
     }
 
     @Override
-    public String getRespuesta() {
+    protected boolean preguntaRespondida() {
+        return respuesta != null;
+    }
+
+    @Override
+    protected String respuesta() {
         return respuesta;
     }
 
     @Override
-    protected boolean preguntaRespondida() {
-        return respuesta != null;
+    protected String getRespuestaPorDefecto() {
+        return "";
     }
 }
