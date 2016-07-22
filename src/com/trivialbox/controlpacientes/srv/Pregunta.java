@@ -29,10 +29,20 @@ public abstract class Pregunta<O, R> {
     }
     
     public abstract void responder(O respuesta);
-    public abstract R getRespuesta();
+    protected abstract R respuesta();
+    protected abstract R getRespuestaPorDefecto();
     protected abstract boolean preguntaRespondida();
     
-    public boolean estaRespondida() {
+    public final R getRespuesta() {
+        if (esOpcional && !preguntaRespondida())
+            return getRespuestaPorDefecto();
+        else if (preguntaRespondida())
+            return respuesta();
+        else
+            throw new PreguntaNoRespondidaException(this.id);
+    }
+    
+    public final boolean estaRespondida() {
         return esOpcional || preguntaRespondida();
     }
 }
