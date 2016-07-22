@@ -21,7 +21,7 @@ _Todo es una pregunta._
 Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta). Las cuales pueden ser:
 
 > -   [Textual](#pregunta-textual).
-> -   [Numérica](#pregunta-numérica) (respuesta sólo admite rango de números).
+> -   [Numérica](#pregunta-numérica).
 > -   [Booleana](#pregunta-booleana) (si/no).
 > -   [Opción múltiple](#pregunta-de-opción-múltiple).
 > -   [Fecha](#pregunta-fecha).
@@ -38,11 +38,11 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 
 #### Pregunta textual
 
-> Como respuesta es un texto, se pueden agregar validaciones adicionales como el tamaño máximo de caracteres, o una expresión regular (para el cliente se le presentarán expresiones regulares ya diseñadas como: números telefónicos, mails, etc).
+> Como respuesta se tiene un texto, se pueden agregar validaciones adicionales como el tamaño máximo de caracteres, o una expresión regular (para el cliente se le presentarán expresiones regulares ya diseñadas como: números telefónicos, mails, etc).
 
 #### Pregunta numérica
 
-> :exclamation: TODO
+> Como respuesta se tiene un número dentro de un rango indicado (inclusivo), además se puede especificar si el intervalo es discreto o continuo (números enteros o reales).
 
 #### Pregunta booleana
 
@@ -50,7 +50,7 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 
 #### Pregunta de opción múltiple
 
-> Como respuesta es una una o varias opciones de una lista de opciones definidas por el usuario, también existe la opción de poner una opción adicional para que el usuario llene al criterio personal. Se puede restringir el número de respuestas selecciondas, en caso de que se restringa una sola respuesta se presenta un combo box (list box).
+> Como respuesta se tiene una una o varias opciones de una lista de opciones definidas por el usuario, también existe la opción de poner una opción adicional para que el usuario llene al criterio personal. Se puede restringir el número de respuestas selecciondas, en caso de que se restringa una sola respuesta se presenta un combo box (list box).
 
 #### Pregunta fecha
 
