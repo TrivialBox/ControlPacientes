@@ -24,6 +24,8 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 > -   [Numérica](#pregunta-numérica) (respuesta sólo admite rango de números).
 > -   [Booleana](#pregunta-booleana) (si/no).
 > -   [Opción múltiple](#pregunta-de-opción-múltiple) (máximo número de selecciones).
+> -   [Fecha](#pregunta-fecha) ().
+> -   [Hora](#pregunta-hora) ().
 
 ### Datos del conjunto
 
@@ -48,7 +50,7 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 
 #### Pregunta de opción múltiple
 
-> :exclamation: TODO
+> Como respuesta es una una o varias opciones de una lista de opciones definidas por el usuario, también existe la opción de poner una opción adicional para que el usuario llene al criterio personal. Se puede restringir el número de respuestas selecciondas, en caso de que se restringa una sola respuesta se presenta un combo box (ListBox).
 
 ### Condiciones adicionales
 
