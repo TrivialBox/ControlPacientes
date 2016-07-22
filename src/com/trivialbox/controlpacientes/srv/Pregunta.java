@@ -8,7 +8,7 @@ import com.trivialbox.controlpacientes.srv.exceptions.PreguntaNoRespondidaExcept
  * @param <R> Respuesta(s)
  */
 public abstract class Pregunta<O, R> {
-    private final int id;    
+    private final int id;
     private String titulo;
     public final Boolean esOpcional;
     private String descripcion = "";

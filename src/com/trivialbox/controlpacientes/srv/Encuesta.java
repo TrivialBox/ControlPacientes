@@ -4,12 +4,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-public final class Grupo {
+public final class Encuesta {
     private final int id;
     private String nombre;
     private final Map<Integer, Pregunta> preguntas;
+    private String descripcion = "";
 
-    public Grupo(int id, String nombre) {
+    public Encuesta(int id, String nombre) {
         this.id = id;
         this.nombre = nombre;
         this.preguntas = new HashMap<>();
@@ -25,6 +26,14 @@ public final class Grupo {
 
     public int getId() {
         return id;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
     }
     
     public Pregunta get(Integer id) {
