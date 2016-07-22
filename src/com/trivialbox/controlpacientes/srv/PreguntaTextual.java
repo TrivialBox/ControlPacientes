@@ -9,8 +9,6 @@ import java.util.regex.Pattern;
 /**
  * Pregunta tipo texto, opcionalmente se pueden definir
  * validaciones como una expresion regular, o un máximo de caracteres.
- * 
- * @author stsewd
  */
 public class PreguntaTextual extends Pregunta<String, String> {
 

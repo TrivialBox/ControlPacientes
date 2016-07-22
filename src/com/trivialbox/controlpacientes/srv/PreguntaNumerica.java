@@ -6,7 +6,6 @@ import com.trivialbox.controlpacientes.srv.exceptions.IntervaloNoValidoException
 /**
  * Como respuesta se tiene un número dentro de un rango indicado (inclusivo),
  * además se puede especificar si el intervalo es discreto o continuo (números enteros o reales).
- * @author stsewd
  */
 public class PreguntaNumerica extends Pregunta<Double, Double> {
     
