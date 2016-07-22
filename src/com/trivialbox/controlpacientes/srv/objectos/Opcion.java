@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv;
+package com.trivialbox.controlpacientes.srv.objectos;
 
 public class Opcion {
     private final String opcion;

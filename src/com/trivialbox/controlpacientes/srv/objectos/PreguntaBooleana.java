@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv;
+package com.trivialbox.controlpacientes.srv.objectos;
 
 import com.trivialbox.controlpacientes.srv.exceptions.PreguntaBooleanaNoRespondida;
 

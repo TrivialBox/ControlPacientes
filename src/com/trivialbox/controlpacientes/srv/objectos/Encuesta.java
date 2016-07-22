@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv;
+package com.trivialbox.controlpacientes.srv.objectos;
 
 import java.util.HashMap;
 import java.util.Iterator;
