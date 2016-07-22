@@ -34,7 +34,7 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 
 ### Preguntas
 
-> Contiene un título, id, puede ser opcional.
+> Contiene un título, id, puede ser opcional, y puede tener una descripción.
 
 #### Pregunta textual
 
