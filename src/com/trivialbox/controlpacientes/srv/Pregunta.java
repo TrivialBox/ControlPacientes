@@ -1,5 +1,7 @@
 package com.trivialbox.controlpacientes.srv;
 
+import com.trivialbox.controlpacientes.srv.exceptions.PreguntaNoRespondidaException;
+
 /**
  * Clase base para preguntas
  * @param <O> Opcion (de una lista de posibles respuestas)
