@@ -9,7 +9,7 @@ _Todo es una pregunta._
 > -   Dirección.
 > -   Teléfono.
 > -   Contacto en caso de accidente.
-> -   :exclamation: Instrucción (revisar a qué hace referencia).
+> -   Instrucción (nivel de educación).
 > -   Fecha de nacimiento.
 > -   Sexo.
 > -   :exclamation: Tipo (revisar a qué hace referencia).
@@ -23,9 +23,9 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 > -   [Textual](#pregunta-textual).
 > -   [Numérica](#pregunta-numérica) (respuesta sólo admite rango de números).
 > -   [Booleana](#pregunta-booleana) (si/no).
-> -   [Opción múltiple](#pregunta-de-opción-múltiple) (máximo número de selecciones).
-> -   [Fecha](#pregunta-fecha) ().
-> -   [Hora](#pregunta-hora) ().
+> -   [Opción múltiple](#pregunta-de-opción-múltiple).
+> -   [Fecha](#pregunta-fecha).
+> -   [Hora](#pregunta-hora).
 
 ### Datos del conjunto
 
@@ -50,7 +50,15 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 
 #### Pregunta de opción múltiple
 
-> Como respuesta es una una o varias opciones de una lista de opciones definidas por el usuario, también existe la opción de poner una opción adicional para que el usuario llene al criterio personal. Se puede restringir el número de respuestas selecciondas, en caso de que se restringa una sola respuesta se presenta un combo box (ListBox).
+> Como respuesta es una una o varias opciones de una lista de opciones definidas por el usuario, también existe la opción de poner una opción adicional para que el usuario llene al criterio personal. Se puede restringir el número de respuestas selecciondas, en caso de que se restringa una sola respuesta se presenta un combo box (list box).
+
+#### Pregunta fecha
+
+> :exclamation: TODO
+
+#### Pregunta hora
+
+> :exclamation: TODO
 
 ### Condiciones adicionales
 
