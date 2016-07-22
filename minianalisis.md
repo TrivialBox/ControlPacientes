@@ -12,13 +12,10 @@ _Todo es una pregunta._
 > -   Instrucción (nivel de educación).
 > -   Fecha de nacimiento.
 > -   Sexo.
-> -   :exclamation: Tipo (revisar a qué hace referencia).
 
-## Conjunto de preguntas
+## Encuesta
 
-:exclamation: ¿Una encuesta está compuesta de conjuntos o un conjunto es una encuesta?
-
-Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta). Las cuales pueden ser:
+Una encuesta conteniene las preguntas individuales (id, enunciado, respuesta). Las cuales pueden ser:
 
 > -   [Textual](#pregunta-textual).
 > -   [Numérica](#pregunta-numérica).
@@ -27,10 +24,11 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 > -   [Fecha](#pregunta-fecha).
 > -   [Hora](#pregunta-hora).
 
-### Datos del conjunto
+### Datos de la encuesta
 
-> -   ID de categoría (o conjunto).
-> -   Nombre de la categoría (o conjunto).
+> -   ID.
+> -   Nombre.
+> -   Descripción adicional.
 
 ### Preguntas
 
@@ -50,7 +48,7 @@ Cada conjunto debe contener las preguntas individuales (id, enunciado, respuesta
 
 #### Pregunta de opción múltiple
 
-> Como respuesta se tiene una una o varias opciones de una lista de opciones definidas por el usuario, también existe la opción de poner una opción adicional para que el usuario llene al criterio personal. Se puede restringir el número de respuestas selecciondas, en caso de que se restringa una sola respuesta se presenta un combo box (list box).
+> Como respuesta se tiene una una o varias opciones de una lista de opciones definidas por el encuestador, también existe la opción de poner una opción adicional para que el encuestado llene a criterio personal. Se puede restringir el número másimo de respuestas selecciondas, en caso de que se restringa una sola respuesta se presenta un combo box (list box).
 
 #### Pregunta fecha
 
