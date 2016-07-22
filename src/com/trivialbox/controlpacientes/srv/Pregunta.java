@@ -9,6 +9,7 @@ public abstract class Pregunta<O, R> {
     private final int id;    
     private String titulo;
     public final Boolean esOpcional;
+    private String descripcion = "";
 
     public Pregunta(int id, String titulo, boolean esOpcional) {
         this.id = id;
@@ -18,6 +19,14 @@ public abstract class Pregunta<O, R> {
 
     public void setTitulo(String titulo) {
         this.titulo = titulo;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    public String getDescripcion() {
+        return descripcion;
     }
 
     public int getId() {
