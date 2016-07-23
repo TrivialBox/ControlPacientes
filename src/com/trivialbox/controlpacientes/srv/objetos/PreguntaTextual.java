@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv.objectos;
+package com.trivialbox.controlpacientes.srv.objetos;
 
 import com.trivialbox.controlpacientes.srv.exceptions.PatronException;
 import com.trivialbox.controlpacientes.srv.exceptions.NumeroMaximoDeCaracteresException;
@@ -13,22 +13,26 @@ import java.util.regex.Pattern;
 public class PreguntaTextual extends Pregunta<String, String> {
 
     private String respuesta;
-    private Integer numMaxCaracteres = 0;
+    private final Integer numMaxCaracteres;
     private String patron = null;
     
-    public PreguntaTextual(int id, String titulo, boolean esOpcional) {
-        super(id, titulo, esOpcional);
+    /**
+     * 
+     * @param id
+     * @param idEncuesta
+     * @param titulo
+     * @param esOpcional
+     * @param numMaxCaracteres 0 si no tiene límite
+     */
+    public PreguntaTextual(int id, int idEncuesta, String titulo, boolean esOpcional, int numMaxCaracteres) {
+        super(id, idEncuesta, titulo, esOpcional);
+        this.numMaxCaracteres = numMaxCaracteres;
     }
 
     public void setPatron(String patron) {
         if (this.patron != null)
             throw new PatronYaDefinidoException();
         this.patron = patron;
-    }
-    
-    public PreguntaTextual(int id, String titulo, boolean esOpcional, Integer numMaxCaracteres) {
-        this(id, titulo, esOpcional);
-        this.numMaxCaracteres = numMaxCaracteres;
     }
 
     @Override

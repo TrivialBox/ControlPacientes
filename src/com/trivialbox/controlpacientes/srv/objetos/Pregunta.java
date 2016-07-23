@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv.objectos;
+package com.trivialbox.controlpacientes.srv.objetos;
 
 import com.trivialbox.controlpacientes.srv.exceptions.PreguntaNoRespondidaException;
 
@@ -8,13 +8,16 @@ import com.trivialbox.controlpacientes.srv.exceptions.PreguntaNoRespondidaExcept
  * @param <R> Respuesta(s)
  */
 public abstract class Pregunta<O, R> {
-    private final int id;
+    protected final Integer idPregunta;
+    protected final Integer idEncuesta;
+    
     private String titulo;
-    public final Boolean esOpcional;
+    private final Boolean esOpcional;
     private String descripcion = "";
 
-    public Pregunta(int id, String titulo, boolean esOpcional) {
-        this.id = id;
+    public Pregunta(int idPregunta, int idEncuesta, String titulo, boolean esOpcional) {
+        this.idPregunta = idPregunta;
+        this.idEncuesta = idEncuesta;
         this.titulo = titulo;
         this.esOpcional = esOpcional;
     }
@@ -31,12 +34,20 @@ public abstract class Pregunta<O, R> {
         return descripcion;
     }
 
-    public int getId() {
-        return id;
+    public int getIdPregunta() {
+        return idPregunta;
+    }
+
+    public int getIdEncuesta() {
+        return idEncuesta;
     }
 
     public String getTitulo() {
         return titulo;
+    }
+    
+    public boolean esOpcional() {
+        return esOpcional;
     }
     
     public abstract void responder(O respuesta);
@@ -50,7 +61,7 @@ public abstract class Pregunta<O, R> {
         else if (preguntaRespondida())
             return respuesta();
         else
-            throw new PreguntaNoRespondidaException(this.id);
+            throw new PreguntaNoRespondidaException(this.idPregunta);
     }
     
     public final boolean estaRespondida() {

@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv.objectos;
+package com.trivialbox.controlpacientes.srv.objetos;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,8 +7,17 @@ public class PreguntaOpcionMultiple extends Pregunta<String, List<Opcion>> {
     
     private final Opciones opciones;
 
-    public PreguntaOpcionMultiple(int id, String titulo, boolean esOpcional, int numMaxSelecciones, boolean tieneCampoAdicional) {
-        super(id, titulo, esOpcional);
+    /**
+     * 
+     * @param id
+     * @param idEncuesta
+     * @param titulo
+     * @param esOpcional
+     * @param numMaxSelecciones 0 si no tiene límite.
+     * @param tieneCampoAdicional 
+     */
+    public PreguntaOpcionMultiple(int id, int idEncuesta, String titulo, boolean esOpcional, int numMaxSelecciones, boolean tieneCampoAdicional) {
+        super(id, idEncuesta, titulo, esOpcional);
         opciones = new Opciones(numMaxSelecciones, tieneCampoAdicional);
     }
     
