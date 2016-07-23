@@ -1,33 +1,24 @@
 package com.trivialbox.controlpacientes.srv.objectos;
 
-import com.trivialbox.controlpacientes.srv.exceptions.PreguntaHoraNoRespondidaException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-
-/**
- *
- * @author root
- */
 public class PreguntaHora extends Pregunta<Calendar, String>{
-    private final Calendar respuestaCalendar;
-    private String respuestaFormatoDB;
+    
+    private String respuesta = null;
 
-    public PreguntaHora(int id, String titulo, boolean esOpcional, Calendar calendarHora) {
-        super(id, titulo, esOpcional);
-        this.respuestaCalendar = calendarHora;
+    public PreguntaHora(int id, int idEncuesta, String titulo, boolean esOpcional) {
+        super(id, idEncuesta, titulo, esOpcional);
     }
 
     @Override
     public void responder(Calendar respuesta) {
-        if(calendarioEsNulo(respuestaCalendar))
-            throw new PreguntaHoraNoRespondidaException(getId());
-        convertirFormatoDB(respuesta);
+        this.respuesta = convertirFormatoDB(respuesta);
     }
 
     @Override
     protected String respuesta() {
-        return this.respuestaFormatoDB;
+        return this.respuesta;
     }
 
     @Override
@@ -37,15 +28,11 @@ public class PreguntaHora extends Pregunta<Calendar, String>{
 
     @Override
     protected boolean preguntaRespondida() {
-        return this.respuestaFormatoDB != null;
-    }
-    private boolean calendarioEsNulo(Calendar calendario){
-        return calendario == null;
+        return this.respuesta != null;
     }
 
-    private void convertirFormatoDB(Calendar respuesta) {
+    private String convertirFormatoDB(Calendar respuesta) {
         SimpleDateFormat formato = new SimpleDateFormat("H:mm:ss");
-        this.respuestaFormatoDB = formato.format(respuesta.getTime());
-        
+        return formato.format(respuesta.getTime());
     }
 }
