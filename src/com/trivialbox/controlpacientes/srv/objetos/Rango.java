@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv.objectos;
+package com.trivialbox.controlpacientes.srv.objetos;
 
 public class Rango {
     private final Double limiteInferior;

@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv.objectos;
+package com.trivialbox.controlpacientes.srv.objetos;
 
 import com.trivialbox.controlpacientes.srv.exceptions.PatronException;
 import com.trivialbox.controlpacientes.srv.exceptions.NumeroMaximoDeCaracteresException;

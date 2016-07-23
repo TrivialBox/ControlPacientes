@@ -1,6 +1,6 @@
 package com.trivialbox.controlpacientes.srv.exceptions;
 
-import com.trivialbox.controlpacientes.srv.objectos.Rango;
+import com.trivialbox.controlpacientes.srv.objetos.Rango;
 
 public class FueraDeRangoException extends RuntimeException {
 
