@@ -15,4 +15,6 @@ hs_err_pid*
 build/
 dist/
 !lib/*
+!lib/absolutelayout/*
+!lib/beans-binding/*
 nbproject/private/
