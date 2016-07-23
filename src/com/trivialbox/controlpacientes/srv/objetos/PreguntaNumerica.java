@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.srv.objectos;
+package com.trivialbox.controlpacientes.srv.objetos;
 
 import com.trivialbox.controlpacientes.srv.exceptions.FueraDeRangoException;
 import com.trivialbox.controlpacientes.srv.exceptions.IntervaloNoValidoException;
@@ -12,8 +12,8 @@ public class PreguntaNumerica extends Pregunta<Double, Double> {
     private Double respuesta = null;
     private final Rango rango;
 
-    public PreguntaNumerica(int id, String titulo, boolean esOpcional, Rango rango) {
-        super(id, titulo, esOpcional);
+    public PreguntaNumerica(int id, int idEncuesta, String titulo, boolean esOpcional, Rango rango) {
+        super(id, idEncuesta, titulo, esOpcional);
         this.rango = rango;
     }
 

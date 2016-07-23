@@ -44,7 +44,7 @@ Una encuesta conteniene las preguntas individuales (id, enunciado, respuesta). L
 
 #### Pregunta booleana
 
-> :exclamation: TODO
+> Como respuesta se tiene 2 opciones (true/false) o null en caso de ser una pregunta opcional.
 
 #### Pregunta de opción múltiple
 
@@ -52,11 +52,12 @@ Una encuesta conteniene las preguntas individuales (id, enunciado, respuesta). L
 
 #### Pregunta fecha
 
-> :exclamation: TODO
+> Como respuesta se tiene un objeto Calendar, el cuál será guardado en formato dd-MM-yyyy
+
 
 #### Pregunta hora
 
-> :exclamation: TODO
+> Como respuesta se tiene un objeto Calendar, el cuál será guardado en formato hh:mm:ss.
 
 ### Condiciones adicionales
 

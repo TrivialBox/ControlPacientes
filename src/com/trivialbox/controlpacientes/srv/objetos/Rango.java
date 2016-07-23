@@ -1,9 +1,9 @@
-package com.trivialbox.controlpacientes.srv.objectos;
+package com.trivialbox.controlpacientes.srv.objetos;
 
 public class Rango {
-    private final double limiteInferior;
-    private final double limiteSuperior;
-    public final boolean esIntervaloDiscreto;
+    private final Double limiteInferior;
+    private final Double limiteSuperior;
+    public final Boolean esIntervaloDiscreto;
 
     public Rango(double limiteInferior, double limiteSuperior, boolean esIntervaloDiscreto) {
         this.limiteInferior = limiteInferior;
