@@ -7,6 +7,7 @@ import java.util.StringJoiner;
 
 public class Sentence {
     
+    
     /*
     public static String insert(Object o) {
         Set<Map.Entry<String, String>> object_values = getValues(o).entrySet();
@@ -31,8 +32,7 @@ public class Sentence {
     }
     
     private static ArrayList<ObjectField> getValues(Object o, ArrayList<String> excludes) {
-        String[] aux = new String[] {"String", "Boolean", "Integer", "Double"};
-        ArrayList<String> basicTypes = new ArrayList<>(Arrays.asList(aux));
+        ArrayList<String> basicTypes = getBasicTypes();
         
         ArrayList<ObjectField> fields = new ArrayList<>();
         try {
@@ -57,9 +57,16 @@ public class Sentence {
         return fields;
     }
     
+    
+    private static ArrayList<String> getBasicTypes() {
+        String[] aux = new String[] {"String", "Boolean", "Integer", "Double"};
+        return new ArrayList<>(Arrays.asList(aux));
+    }
+    
     public static String selectAll(String tableName) {
         String query;
-        query = "SELECT * FROM " + tableName;
+        query = "SELECT" + " "  + "*"  + " " +
+                "FROM" + " " + tableName;
         return query;
     }
     

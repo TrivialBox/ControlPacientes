@@ -6,11 +6,16 @@ import javax.swing.UIManager;
 public class ControlPacientes {
 
     public static void main(String[] args) {
+        setLookAndFeel();
+        Login login = new Login();
+        login.setVisible(true);
+    }
+
+    private static void setLookAndFeel() {
         try {
             //Look and feel para sistemas linux con gtk
             UIManager.setLookAndFeel("com.sun.java.swing.plaf.gtk.GTKLookAndFeel"); 
-        } 
-        catch(Exception e){
+        } catch(Exception e) {
             try {
                 //Look and feel para sistemas windows
                 UIManager.setLookAndFeel("com.sun.java.swing.plaf.windows.WindowsLookAndFeel");
@@ -18,8 +23,6 @@ public class ControlPacientes {
                 //Carga interfaz por defecto de java swing
             }
         }
-        Login login = new Login();
-        login.setVisible(true);
     }
     
 }
