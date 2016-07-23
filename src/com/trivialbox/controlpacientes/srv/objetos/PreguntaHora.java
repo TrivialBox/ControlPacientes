@@ -1,6 +1,5 @@
 package com.trivialbox.controlpacientes.srv.objetos;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class PreguntaHora extends Pregunta<Calendar, String>{
@@ -13,7 +12,7 @@ public class PreguntaHora extends Pregunta<Calendar, String>{
 
     @Override
     public void responder(Calendar respuesta) {
-        this.respuesta = convertirFormatoDB(respuesta);
+        this.respuesta = Tools.calendarToTimeString(respuesta);
     }
 
     @Override
@@ -29,10 +28,5 @@ public class PreguntaHora extends Pregunta<Calendar, String>{
     @Override
     protected boolean preguntaRespondida() {
         return this.respuesta != null;
-    }
-
-    private String convertirFormatoDB(Calendar respuesta) {
-        SimpleDateFormat formato = new SimpleDateFormat("H:mm:ss");
-        return formato.format(respuesta.getTime());
     }
 }
