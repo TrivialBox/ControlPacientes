@@ -17,4 +17,5 @@ dist/
 !lib/*
 !lib/absolutelayout/*
 !lib/beans-binding/*
+!lib/CopyLibs/*
 nbproject/private/
