@@ -3,7 +3,7 @@ package com.trivialbox.controlpacientes.srv.objetos;
 public class Paciente extends Persona {
     private String contactoEmergencia;
     private String fechaNacimiento;
-    private String instrucccion;
+    private String nivelAcademico;
 
     public Paciente(String idPersona,
                     String clave,
@@ -13,13 +13,13 @@ public class Paciente extends Persona {
                     String sexo,
                     String contactoEmergencia,
                     String fechaNacimiento,
-                    String instrucccion
+                    String nivelAcademico
     ) {
         
         super(idPersona, clave, nombre, direccion, telefono, sexo);
         this.contactoEmergencia = contactoEmergencia;
         this.fechaNacimiento = fechaNacimiento;
-        this.instrucccion = instrucccion;
+        this.nivelAcademico = nivelAcademico;
     }
 
     public String getContactoEmergencia() {
@@ -42,8 +42,8 @@ public class Paciente extends Persona {
         this.fechaNacimiento = fechaNacimiento;
     }
 
-    public void setInstrucccion(String instrucccion) {
-        this.instrucccion = instrucccion;
+    public void setNivelAcademico(String nivelAcademico) {
+        this.nivelAcademico = nivelAcademico;
     }
     
 }
