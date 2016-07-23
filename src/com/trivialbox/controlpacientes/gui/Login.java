@@ -3,7 +3,7 @@ package com.trivialbox.controlpacientes.gui;
 
 public class Login extends javax.swing.JFrame {
     private final MensajeHolder mensajeHolder = new MensajeHolder();
-    private final DiseñoHolder disenioHolder = new DiseñoHolder();
+    private final DisenioHolder disenioHolder = new DisenioHolder();
     /**
      * Creates new form Login
      */
