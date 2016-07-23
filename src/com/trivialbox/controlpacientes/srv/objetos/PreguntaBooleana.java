@@ -1,7 +1,5 @@
 package com.trivialbox.controlpacientes.srv.objetos;
 
-import com.trivialbox.controlpacientes.srv.exceptions.PreguntaBooleanaNoRespondida;
-
 
 public class PreguntaBooleana extends Pregunta<Boolean, Boolean>{
     
@@ -13,8 +11,6 @@ public class PreguntaBooleana extends Pregunta<Boolean, Boolean>{
 
     @Override
     public void responder(Boolean respuesta) {
-        if(esNula(respuesta))
-            throw new PreguntaBooleanaNoRespondida(getIdPregunta());
         this.respuesta = respuesta;
     }
 
