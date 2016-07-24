@@ -1,8 +1,8 @@
 package com.trivialbox.controlpacientes.dao.exceptions;
 
-public class AuntenticacionException extends RuntimeException {
+public class AutenticacionException extends RuntimeException {
 
-    public AuntenticacionException() {
+    public AutenticacionException() {
         super("Usuario y contraseña no coinciden.");
     }
     

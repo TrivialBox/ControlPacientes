@@ -1,9 +1,10 @@
 package com.trivialbox.controlpacientes.dao;
 
-import com.trivialbox.controlpacientes.dao.exceptions.AuntenticacionException;
+import com.trivialbox.controlpacientes.dao.exceptions.AutenticacionException;
 import com.trivialbox.controlpacientes.dao.db.DataBase;
 import com.trivialbox.controlpacientes.dao.db.DataBaseURL;
 import com.trivialbox.controlpacientes.dao.db.LoginDB;
+import com.trivialbox.controlpacientes.srv.objetos.Administrador;
 import com.trivialbox.controlpacientes.srv.objetos.Paciente;
 import com.trivialbox.controlpacientes.srv.objetos.Tools;
 
@@ -13,7 +14,11 @@ public class LoginDAO {
     private static final String user = "controlpacientes";
     
     public static void autenticarAdmin(String cedula) {
-        // TODO
+        Administrador a = AdministradoresDAO.getInstance().get(cedula);
+        if (a.getClave().equalsIgnoreCase(Tools.encryptPassword(password)))
+            autenticar();
+        else
+            throw new AutenticacionException();
     }
     
     public static void autenticarPaciente(String cedula, String password) {
@@ -21,7 +26,7 @@ public class LoginDAO {
         if (p.getClave().equalsIgnoreCase(Tools.encryptPassword(password)))
             autenticar();
         else
-            throw new AuntenticacionException();
+            throw new AutenticacionException();
     }
     
     private static void autenticar() {
