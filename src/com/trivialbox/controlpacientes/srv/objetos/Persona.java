@@ -1,5 +1,9 @@
 package com.trivialbox.controlpacientes.srv.objetos;
 
+import com.trivialbox.controlpacientes.dao.db.ObjectField;
+import java.util.ArrayList;
+import java.util.List;
+
 public abstract class Persona {
     protected final String idPersona;
     private String clave;
@@ -62,4 +66,14 @@ public abstract class Persona {
         this.telefono = telefono;
     }
     
+    public List<ObjectField> getFieldsPersona() {
+        List<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idpersona", getIdPersona()));
+        fields.add(new ObjectField("nombre", getNombre()));
+        fields.add(new ObjectField("direccion", getDireccion()));
+        fields.add(new ObjectField("telefono", getTelefono()));
+        fields.add(new ObjectField("sexo", getSexo()));
+        fields.add(new ObjectField("clave", getClave()));
+        return fields;
+    }
 }

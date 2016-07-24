@@ -30,8 +30,8 @@ public class Paciente extends Persona {
         return fechaNacimiento;
     }
 
-    public String getInstrucccion() {
-        return instrucccion;
+    public String getnivelAcademico() {
+        return nivelAcademico;
     }
 
     public void setContactoEmergencia(String contactoEmergencia) {

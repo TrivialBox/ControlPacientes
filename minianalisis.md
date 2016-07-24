@@ -2,6 +2,7 @@
 
 _Todo es una pregunta._
 
+
 ## Preguntas por defecto y obligatorias
 
 > -   Cédula.

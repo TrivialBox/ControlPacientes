@@ -14,5 +14,8 @@ hs_err_pid*
 # Netbeans
 build/
 dist/
-!lib/*jar
+!lib/*
+!lib/absolutelayout/*
+!lib/beans-binding/*
+!lib/CopyLibs/*
 nbproject/private/
