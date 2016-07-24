@@ -1,9 +1,14 @@
 package com.trivialbox.controlpacientes.dao;
 
 import com.trivialbox.controlpacientes.dao.db.DataBase;
+import com.trivialbox.controlpacientes.dao.db.ObjectField;
+import com.trivialbox.controlpacientes.dao.db.RowDB;
+import com.trivialbox.controlpacientes.dao.db.TablaDB;
 import com.trivialbox.controlpacientes.srv.objetos.Administrador;
 import com.trivialbox.controlpacientes.srv.objetos.Persona;
 import com.trivialbox.controlpacientes.srv.objetos.Tools;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class AdministradoresDAO {
@@ -22,15 +27,21 @@ public class AdministradoresDAO {
     }
             
     public Administrador get(String cedula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Administrador administrador;
+        String[] tables = new String[]{"Persona", "Administrador"};
+        TablaDB result = dataBase.select(Arrays.asList(tables), "idpersona", cedula);
+        administrador = construirAdministrador(result, 0);
+        return administrador;
     }
 
     public void del(String cedula) {
         try {
             Administrador administrador = get(cedula);
+            List<ObjectField> fieldsAdministrador = Tools.getValues(administrador, null);
+            fieldsAdministrador.addAll(getExtraFields(administrador));
             dataBase.delete(
                     Tools.getObjectName(administrador),
-                    Tools.getValues(administrador, null)
+                    fieldsAdministrador
             );
             
             dataBase.delete(
@@ -50,9 +61,12 @@ public class AdministradoresDAO {
                     administrador.getFieldsPersona()
             );
             
+            List<ObjectField> fieldsAdministrador = Tools.getValues(administrador, null);
+            fieldsAdministrador.addAll(getExtraFields(administrador));
+            
             dataBase.insert(
                     Tools.getObjectName(administrador),
-                    Tools.getValues(administrador, null)
+                    fieldsAdministrador
             );
             
             return administrador;
@@ -69,11 +83,17 @@ public class AdministradoresDAO {
                     administradorOld.getFieldsPersona(),
                     administrador.getFieldsPersona()
             );
+            
+            List<ObjectField> fieldsPaciente = Tools.getValues(administrador, null);
+            fieldsPaciente.addAll(getExtraFields(administrador));
+            
+            List<ObjectField> fieldsOldPaciente = Tools.getValues(administradorOld, null);
+            fieldsOldPaciente.addAll(getExtraFields(administradorOld));
 
             dataBase.update(
                     Tools.getObjectName(administrador),
-                    Tools.getValues(administradorOld, null),
-                    Tools.getValues(administrador, null)
+                    fieldsOldPaciente,
+                    fieldsPaciente
             );
             
             return administrador;
@@ -83,6 +103,35 @@ public class AdministradoresDAO {
     }
 
     public List<Administrador> get() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Administrador> administradores = new ArrayList<>();
+        String[] tables = new String[]{"Persona", "Paciente"};
+        TablaDB result = dataBase.selectAll(Arrays.asList(tables), "idPersona");
+        int index = 0;
+        for (RowDB r : result)
+            administradores.add(construirAdministrador(result, index++));
+        return administradores;
+    }
+
+    private Administrador construirAdministrador(TablaDB result, int index) {
+        Administrador administrador;
+        RowDB r = result.getRow(index);
+
+        // Espero funciones :/
+        administrador = new Administrador(
+                r.getField(0),
+                r.getField(5),
+                r.getField(1),
+                r.getField(2),
+                r.getField(3),
+                r.getField(4)
+        );
+        administrador.setFechaUltimoAcceso(r.getField(7));
+        return administrador;
+    }
+
+    private List<ObjectField> getExtraFields(Administrador administrador) {
+        ArrayList<ObjectField> extraFields = new ArrayList<>();
+        extraFields.add(new ObjectField("idpersona", administrador.getIdPersona()));
+        return extraFields;
     }
 }
