@@ -1,5 +1,6 @@
 package com.trivialbox.controlpacientes.dao.db;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.StringJoiner;
 
@@ -134,4 +135,25 @@ public class Sentence {
         return condition.toString();
     }
     
+    public static String search(String tableName, ArrayList<String> cols, String subString) {
+        String query;
+        StringJoiner search = new StringJoiner(" or ");
+        for (String col : cols)
+            search.add("UPPER" + " " + "(" + col + ")" + " " +
+                    "LIKE" + " " + "'" + "%" +
+                    subString.toUpperCase() + "%" + "'"
+            );
+        query = "SELECT" + " " + "*" + " " +
+                "FROM" + " " + tableName + " " +
+                "WHERE" + " " + search.toString();
+        return query;
+    }
+    
+    static String allFields(String tableName) {
+        String query;
+        query = "SELECT" + " " + "COLUMN_NAME" + " " +
+                "FROM" + " " + "USER_TAB_COLUMNS" + " " +
+                "WHERE" + " " + "TABLE_NAME" + "=" + "'" + tableName + "'";
+        return query;
+    }
 }
