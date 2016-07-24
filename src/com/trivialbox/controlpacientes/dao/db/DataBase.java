@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DataBase {
-    // TODO revisar cada método.
     private Connection connection;
     private Statement stmt;
     
@@ -174,14 +173,26 @@ public class DataBase {
             closeConnection();
         }
     }
+    
+    public TablaDB select(List<String> tablesName, String colName, String value) {
+        String query = Sentence.select(tablesName, colName, value);
+        TablaDB result = consult(query);
+        return result;
+    }
+    
+    public TablaDB selectAll(List<String> tablesName, String field) {
+        String query = Sentence.selectAll(tablesName, field);
+        TablaDB result = consult(query);
+        return result;
+    }
 
     private ArrayList<String> getHeader(ResultSet result) {
         try {
-            ArrayList<String> columna = new ArrayList<>();
+            ArrayList<String> row = new ArrayList<>();
             int numCols = result.getMetaData().getColumnCount();
             for (int i = 0; i < numCols; i++)
-                columna.add(result.getMetaData().getColumnName(i + 1));
-            return columna;
+                row.add(result.getMetaData().getColumnName(i + 1));
+            return row;
         } catch (SQLException ex) {
             throw new AddHeaderException(ex);
         }

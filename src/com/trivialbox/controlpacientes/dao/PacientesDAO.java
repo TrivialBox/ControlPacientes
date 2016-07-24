@@ -1,9 +1,14 @@
 package com.trivialbox.controlpacientes.dao;
 
 import com.trivialbox.controlpacientes.dao.db.DataBase;
+import com.trivialbox.controlpacientes.dao.db.ObjectField;
+import com.trivialbox.controlpacientes.dao.db.RowDB;
+import com.trivialbox.controlpacientes.dao.db.TablaDB;
 import com.trivialbox.controlpacientes.srv.objetos.Paciente;
 import com.trivialbox.controlpacientes.srv.objetos.Persona;
 import com.trivialbox.controlpacientes.srv.objetos.Tools;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class PacientesDAO {
@@ -22,15 +27,41 @@ public class PacientesDAO {
     }
             
     public Paciente get(String cedula) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        Paciente paciente;
+        String[] tables = new String[]{"Persona", "Paciente"};
+        TablaDB result = dataBase.select(Arrays.asList(tables), "idpersona", cedula);
+        paciente = construirPaciente(result, 0);
+        return paciente;
+    }
+    
+    private Paciente construirPaciente(TablaDB result, int index) {
+        Paciente paciente;
+        RowDB r = result.getRow(index);
+
+        // Espero funciones :/
+        paciente = new Paciente(
+                r.getField(0),
+                r.getField(5),
+                r.getField(1),
+                r.getField(2),
+                r.getField(3),
+                r.getField(4),
+                r.getField(6),
+                r.getField(7),
+                r.getField(8)
+        );
+        
+        return paciente;
     }
 
     public void del(String cedula) {
         try {
             Paciente paciente = get(cedula);
+            List<ObjectField> fieldsPaciente = Tools.getValues(paciente, null);
+            fieldsPaciente.addAll(getExtraFields(paciente));
             dataBase.delete(
                     Tools.getObjectName(paciente),
-                    Tools.getValues(paciente, null)
+                    fieldsPaciente
             );
             
             dataBase.delete(
@@ -50,9 +81,11 @@ public class PacientesDAO {
                     paciente.getFieldsPersona()
             );
             
+            List<ObjectField> fieldsPaciente = Tools.getValues(paciente, null);
+            fieldsPaciente.addAll(getExtraFields(paciente));
             dataBase.insert(
                     Tools.getObjectName(paciente),
-                    Tools.getValues(paciente, null)
+                    fieldsPaciente
             );
             
             return paciente;
@@ -69,11 +102,17 @@ public class PacientesDAO {
                     pacienteOld.getFieldsPersona(),
                     paciente.getFieldsPersona()
             );
+            
+            List<ObjectField> fieldsPaciente = Tools.getValues(paciente, null);
+            fieldsPaciente.addAll(getExtraFields(paciente));
+            
+            List<ObjectField> fieldsOldPaciente = Tools.getValues(pacienteOld, null);
+            fieldsOldPaciente.addAll(getExtraFields(pacienteOld));
 
             dataBase.update(
                     Tools.getObjectName(paciente),
-                    Tools.getValues(pacienteOld, null),
-                    Tools.getValues(paciente, null)
+                    fieldsOldPaciente,
+                    fieldsPaciente
             );
             
             return paciente;
@@ -83,6 +122,18 @@ public class PacientesDAO {
     }
 
     public List<Paciente> get() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        List<Paciente> pacientes = new ArrayList<>();
+        String[] tables = new String[]{"Persona", "Paciente"};
+        TablaDB result = dataBase.selectAll(Arrays.asList(tables), "idPersona");
+        int index = 0;
+        for (RowDB r : result)
+            pacientes.add(construirPaciente(result, index++));
+        return pacientes;
+    }
+
+    private List<ObjectField> getExtraFields(Paciente paciente) {
+        ArrayList<ObjectField> extraFields = new ArrayList<>();
+        extraFields.add(new ObjectField("idpersona", paciente.getIdPersona()));
+        return extraFields;
     }
 }

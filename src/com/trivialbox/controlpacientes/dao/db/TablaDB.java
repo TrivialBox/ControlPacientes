@@ -18,7 +18,11 @@ public class TablaDB implements Iterable<RowDB>{
     public void addRow(RowDB row) {
         rows.add(row);
     }
-
+    
+    public RowDB getRow(int index) {
+        return rows.get(index);
+    }
+    
     public ArrayList<String> getHeaders() {
         return header;
     }
