@@ -4,7 +4,7 @@ import javax.swing.JTextField;
 
 
 public class DisenioHolder {
-    String plomo = "#818181";
+    String plomo = "#BCBCBC";
     String negro = "#000000";
 
     public void mensaje(JTextField letra, String Mensaje, int tam) {
