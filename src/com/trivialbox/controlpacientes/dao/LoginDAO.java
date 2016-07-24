@@ -14,19 +14,21 @@ public class LoginDAO {
     private static final String user = "controlpacientes";
     
     public static void autenticarAdmin(String cedula) {
+        autenticar();
         Administrador a = AdministradoresDAO.getInstance().get(cedula);
-        if (a.getClave().equalsIgnoreCase(Tools.encryptPassword(password)))
-            autenticar();
-        else
+        if (!a.getClave().equalsIgnoreCase(Tools.encryptPassword(password))) {
+            cerrarSesion();
             throw new AutenticacionException();
+        }
     }
     
     public static void autenticarPaciente(String cedula, String password) {
+        autenticar();
         Paciente p = PacientesDAO.getInstance().get(cedula);
-        if (p.getClave().equalsIgnoreCase(Tools.encryptPassword(password)))
-            autenticar();
-        else
+        if (!p.getClave().equalsIgnoreCase(Tools.encryptPassword(password))) {
+            cerrarSesion();
             throw new AutenticacionException();
+        }
     }
     
     private static void autenticar() {
