@@ -20,4 +20,5 @@ public class RowDB {
     public String getField(int index) {
         return fields.get(index);
     }
+    
 }

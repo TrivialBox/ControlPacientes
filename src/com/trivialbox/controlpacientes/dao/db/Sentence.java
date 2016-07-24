@@ -156,4 +156,31 @@ public class Sentence {
                 "WHERE" + " " + "TABLE_NAME" + "=" + "'" + tableName + "'";
         return query;
     }
+
+    static String select(List<String> tablesName, String colName, String value) {
+        String query;
+        query = "SELECT" + " " +  "*" + " " +
+                "FROM" + " " + join(tablesName, ", ") + " " +
+                "WHERE" + " " + colName + "=" + "'" + value + "'";
+        return query;
+    }
+    
+    static String selectAll(List<String> tablesName, String field) {
+        StringJoiner condition = new StringJoiner(" and ");
+        condition.add(tablesName.get(0) + "." + field + "=" + tablesName.get(1) + "." + field);
+        
+        String query;
+        query = "SELECT" + " " + "*" + " " +
+                "FROM" + " " + join(tablesName, ", ") +
+                "WHERE" + " " + condition.toString();
+        return query;
+    }
+
+    private static String join(List<String> words, String separator) {
+        StringJoiner result = new StringJoiner(separator);
+        for (String w : words)
+            result.add(w);
+        return result.toString();
+    }
+
 }
