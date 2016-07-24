@@ -1,4 +1,6 @@
-package com.trivialbox.controlpacientes.dao.db;
+package com.trivialbox.controlpacientes.dao.db.exceptions;
+
+import com.trivialbox.controlpacientes.dao.db.LoginDB;
 
 public class ConnectionException extends RuntimeException {
 

@@ -1,68 +1,10 @@
 package com.trivialbox.controlpacientes.dao.db;
 
-import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 import java.util.StringJoiner;
 
 public class Sentence {
-    
-    
-    /*
-    public static String insert(Object o) {
-        Set<Map.Entry<String, String>> object_values = getValues(o).entrySet();
-        StringJoiner fields = new StringJoiner(",");
-        StringJoiner values = new StringJoiner(",");
         
-        for (Map.Entry<String, String> entry : object_values) {
-            fields.add(entry.getKey());
-            values.add(entry.getValue());
-        }
-        
-        String query;
-        query = "INSERT INTO " + getName(o) + " " +
-                "(" + fields.toString() + ")" + " " +
-                "VALUES(" + values.toString() + ")";
-        return query;
-    }
-    */
-    
-    private static String getName(Object o) {
-        return o.getClass().getName();
-    }
-    
-    private static ArrayList<ObjectField> getValues(Object o, ArrayList<String> excludes) {
-        ArrayList<String> basicTypes = getBasicTypes();
-        
-        ArrayList<ObjectField> fields = new ArrayList<>();
-        try {
-            for (Field field : o.getClass().getDeclaredFields()) {
-                field.setAccessible(true);
-                Object obj = field.get(o);
-                String type = field.getType().getSimpleName();
-                String name = field.getName();
-                String value = obj == null ? "" : obj.toString();
-                
-                if (excludes.contains(name))
-                    continue;
-                
-                if (basicTypes.contains(type))
-                    fields.add(new ObjectField(name, value));
-                else if (obj != null)
-                    fields.addAll(getValues(obj, excludes));
-            }
-        } catch (IllegalArgumentException | IllegalAccessException ex) {
-            // Todo esta bien
-        }
-        return fields;
-    }
-    
-    
-    private static ArrayList<String> getBasicTypes() {
-        String[] aux = new String[] {"String", "Boolean", "Integer", "Double"};
-        return new ArrayList<>(Arrays.asList(aux));
-    }
-    
     public static String selectAll(String tableName) {
         String query;
         query = "SELECT" + " "  + "*"  + " " +
@@ -145,6 +87,51 @@ public class Sentence {
                 "FROM" + " " + tableName + " " +
                 "WHERE" + " " + colName + operator + "'" + value + "'";
         return query;
+    }
+
+    static String insert(String tableName, List<ObjectField> fields) {
+        StringJoiner fieldsNames = new StringJoiner(",");
+        StringJoiner fieldsValues = new StringJoiner(",");
+        for (ObjectField field : fields) {
+            if (!field.getValue().isEmpty()) {
+                fieldsNames.add(field.getName());
+                fieldsValues.add("'" + field.getValue() + "'");
+            }
+        }
+        String query;
+        query = "INSERT" + " " + "INTO" + " " + tableName + " " +
+                "(" + fieldsNames.toString() + ")" + " " +
+                "VALUES" + "(" + fieldsValues.toString() + ")";
+        return query;
+    }
+
+    static String update(String tableName, List<ObjectField> previewFields, List<ObjectField> newFields) {
+        String query;
+        query = "UPDATE" + " " + tableName + " " +
+                "SET" + " " + getSet(newFields) + " " +
+                "WHERE" + " " + getCondition(previewFields);
+        return query;
+    }
+    
+    private static String getSet(List<ObjectField> fields) {
+        StringJoiner condition = new StringJoiner(", ");
+        for (ObjectField field : fields)
+            condition.add(field.getName() + "=" + "'" + field.getValue() + "'");
+        return condition.toString();
+    }
+
+    static String delete(String tableName, List<ObjectField> fields) {
+        String query;
+        query = "DELETE FROM" + " " + tableName + " " +
+                "WHERE" + " " + getCondition(fields); 
+        return query;
+    }
+    
+    private static String getCondition(List<ObjectField> fields) {
+        StringJoiner condition = new StringJoiner(" AND ");
+        for (ObjectField field : fields)
+            condition.add(field.getName() + "=" + "'" + field.getValue() + "'");
+        return condition.toString();
     }
     
 }
