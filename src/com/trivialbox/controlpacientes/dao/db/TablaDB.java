@@ -14,6 +14,10 @@ public class TablaDB implements Iterable<RowDB>{
         this.header = header;
         this.rows = new ArrayList<>();
     }
+    
+    public void addRow(RowDB row) {
+        rows.add(row);
+    }
 
     public ArrayList<String> getHeaders() {
         return header;
