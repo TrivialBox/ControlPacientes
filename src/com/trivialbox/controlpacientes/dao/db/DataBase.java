@@ -13,12 +13,23 @@ public class DataBase {
     
     private Connection connection;
     private Statement stmt;
-
-    public DataBase(LoginDB login) {
-        conectar(login);
+    
+    private static DataBase instance;
+    
+    public static DataBase getInstance() {
+        if (instance == null)
+            instance = new DataBase();
+        return instance;
     }
     
-    private void conectar(LoginDB login) {
+    public static void deleteInstance() {
+        instance = null;
+    }
+
+    private DataBase() {
+    }
+    
+    public void conectar(LoginDB login) {
         try {
             Connection conn;
             conn = DriverManager.getConnection(login.getDbUrl(), login.getProperties());
@@ -75,4 +86,5 @@ public class DataBase {
             throw new CloseConnectionException();
         }
     }
+
 }
