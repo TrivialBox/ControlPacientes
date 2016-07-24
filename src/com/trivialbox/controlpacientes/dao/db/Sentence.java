@@ -161,7 +161,7 @@ public class Sentence {
         String query;
         query = "SELECT" + " " +  "*" + " " +
                 "FROM" + " " + join(tablesName, ", ") + " " +
-                "WHERE" + " " + colName + "=" + "'" + value + "'";
+                "WHERE" + " " + getCondition(tablesName, colName, value);
         return query;
     }
     
@@ -181,6 +181,13 @@ public class Sentence {
         for (String w : words)
             result.add(w);
         return result.toString();
+    }
+
+    private static String getCondition(List<String> tablesName, String colName, String value) {
+        StringJoiner condition = new StringJoiner(" AND ");
+        for (String table : tablesName)
+            condition.add(table + "." + colName + "=" + "'" + value + "'");
+        return condition.toString();
     }
 
 }
