@@ -13,19 +13,19 @@ public class LoginDAO {
     private static final String password = "1234";  // Ya sé, ya sé, pero no se me ocurre una solucion ahora.
     private static final String user = "controlpacientes";
     
-    public static void autenticarAdmin(String cedula) {
+    public static void autenticarAdmin(String cedula, String clave) {
         autenticar();
         Administrador a = AdministradoresDAO.getInstance().get(cedula);
-        if (!a.getClave().equalsIgnoreCase(Tools.encryptPassword(password))) {
+        if (!a.getClave().equalsIgnoreCase(Tools.encryptPassword(clave))) {
             cerrarSesion();
             throw new AutenticacionException();
         }
     }
     
-    public static void autenticarPaciente(String cedula, String password) {
+    public static void autenticarPaciente(String cedula, String clave) {
         autenticar();
         Paciente p = PacientesDAO.getInstance().get(cedula);
-        if (!p.getClave().equalsIgnoreCase(Tools.encryptPassword(password))) {
+        if (!p.getClave().equalsIgnoreCase(Tools.encryptPassword(clave))) {
             cerrarSesion();
             throw new AutenticacionException();
         }
