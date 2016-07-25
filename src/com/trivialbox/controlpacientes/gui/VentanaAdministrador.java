@@ -162,17 +162,20 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void entryNombreEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryNombreEncuestaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_entryNombreEncuestaActionPerformed
-
     private void btnCrearEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEncuestaActionPerformed
+        encuestaSrv = new EncuestaSrv();
+        encuestaSrv.agregarEncuesta(entryNombreEncuesta.getText(), "null");
         agregarNuevaEncuesta(entryNombreEncuesta.getText());
         this.update(this.getGraphics());
+        this.entryNombreEncuesta.setText(null);
         
         
         
     }//GEN-LAST:event_btnCrearEncuestaActionPerformed
+
+    private void entryNombreEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryNombreEncuestaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_entryNombreEncuestaActionPerformed
 
     /**
      * @param args the command line arguments
