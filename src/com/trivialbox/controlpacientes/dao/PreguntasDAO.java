@@ -337,7 +337,7 @@ public class PreguntasDAO {
         for (String opcion : pregunta.getOpciones()) {
             ArrayList<ObjectField> fieldsOpcion = new ArrayList<>();
             fieldsOpcion.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
-            fieldsOpcion.add(new ObjectField("idPregunta", Integer.toString(pregunta.getIdPregunta())));
+            fieldsOpcion.add(new ObjectField("idPregunta", getIdPregunta(pregunta)));
             fieldsOpcion.add(new ObjectField("nombre", opcion));
 
             dataBase.insert(
