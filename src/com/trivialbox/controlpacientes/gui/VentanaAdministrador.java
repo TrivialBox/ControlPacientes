@@ -1,14 +1,24 @@
 package com.trivialbox.controlpacientes.gui;
 
+import java.awt.Color;
+import java.awt.Dimension;
+import java.util.List;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import javafx.scene.layout.Border;
+import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
+
 
 /**
  *
  * @author root
  */
 public class VentanaAdministrador extends javax.swing.JFrame {
-
+    List<JPanel> listaEncuestas = new ArrayList<>();
     /**
      * Creates new form VentanaAdministrador
      */
@@ -17,14 +27,57 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         crearEncuetas();
     }
     void crearEncuetas(){
-        JPanel panel = new JPanel();
-        panel.setBounds(5, 5, 100, 100);
-        this.add(panel);
-        JButton boton = new JButton("boton");
-        boton.setBounds(50, 10, 100, 50);
-        panel.add(boton);
-    }
+        
+        List<String> encuestas = new ArrayList<>();
+        encuestas.add("Hola mudno como estas por alla");
+        encuestas.add("dos");
+        encuestas.add("dfdf");
+        encuestas.add("ghos");
+        encuestas.add("fghjjhj");
+        encuestas.add("sd");
+        encuestas.add("jjjjjj");
+        Dimension dimension = new Dimension(150, 30);
+        int posX = 5, posY = 5;
+        
+         for(int a = 0; a < 7;a++){
+            JPanel panel = new JPanel();
+            panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.getHSBColor(122, 55, 65)),
+                                                                BorderFactory.createEmptyBorder(10, 15, 5, 15)));
+            JLabel label1;
+            if(encuestas.get(a).length() >= 10){
+                label1 = new JLabel(encuestas.get(a).substring(0, 10)+"..");
+            }else {
+                label1 = new JLabel(encuestas.get(a));
+            }
+            label1.setToolTipText(encuestas.get(a));
+            JLabel label = new JLabel(encuestas.get(a));
+            panel.setBounds(posX, posY, 100, 70);
+            if(posX >300){
+                posX = 5;
+                posY = posY + 80;
+            }else{
+                posX= posX+110;
+            }
+            
+            this.add(panel);
+            JButton boton = new JButton("Editar");
+            
+            boton.setSize(dimension);
 
+
+            boton.addActionListener((java.awt.event.ActionEvent evt) -> {
+                actionPerformedqq(evt,label.getText());
+            });
+
+            label.setBounds(a, a, 100, 30);
+            panel.add(label1);
+            panel.add(boton);
+        }
+        
+    }
+    public void actionPerformedqq(ActionEvent e, String nom) {
+        System.out.println(nom);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
