@@ -5,7 +5,9 @@ import com.trivialbox.controlpacientes.dao.exceptions.EncuestaNoPermitidaExcepti
 import com.trivialbox.controlpacientes.dao.exceptions.UsuarioEncuestaNoEncontradoException;
 import com.trivialbox.controlpacientes.dao.db.DataBase;
 import com.trivialbox.controlpacientes.dao.db.ObjectField;
+import com.trivialbox.controlpacientes.dao.db.RowDB;
 import com.trivialbox.controlpacientes.dao.db.TablaDB;
+import com.trivialbox.controlpacientes.srv.objetos.Opcion;
 import com.trivialbox.controlpacientes.srv.objetos.Pregunta;
 import com.trivialbox.controlpacientes.srv.objetos.PreguntaBooleana;
 import com.trivialbox.controlpacientes.srv.objetos.PreguntaFecha;
@@ -180,10 +182,32 @@ public class RespuestasDAO {
     }
 
     private void insertarRespuestaPreguntaOpcionMultiple(String idRespuesta, PreguntaOpcionMultiple pregunta) {
-        // TODO
+        
+        ArrayList<String> table = new ArrayList<>();
+        table.add("Opcion");
+        
         ArrayList<ObjectField> fields = new ArrayList<>();
-        // fields.add(new ObjectField("respuesta", pregunta.getRespuesta()));
-        fields.add(new ObjectField("idRespuesta", idRespuesta));
-        dataBase.insert("Respuesta" + Tools.getObjectName(pregunta), fields);
+        
+        fields.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
+        fields.add(new ObjectField("idPregunta", Integer.toString(pregunta.getIdPregunta())));
+
+        TablaDB resultOpciones = dataBase.select(table, fields);
+        
+        for (Opcion opcion : pregunta.getRespuesta()) {
+            fields = new ArrayList<>();
+            fields.add(new ObjectField("idRespuesta", idRespuesta));
+            fields.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
+            fields.add(new ObjectField("idPregunta", Integer.toString(pregunta.getIdPregunta())));
+            fields.add(new ObjectField("idPregunta", getIdOpcion(resultOpciones, opcion)));
+            dataBase.insert("RespuestaPreguntaOpcional", fields);
+        }
+    }
+
+    private String getIdOpcion(TablaDB resultOpciones, Opcion opcion) {
+        for (RowDB row : resultOpciones)
+            if (row.getField(3).equalsIgnoreCase(opcion.getOpcion()))
+                return row.getField(0);
+        // TODO Crear nueva opcion
+        return null;
     }
 }
