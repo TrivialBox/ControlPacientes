@@ -83,6 +83,12 @@ public class VentanaPreguntaBooleana extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public String obtenerTituloPregunta(){
+        return this.entryTituloPregunta.getText();
+    }
+    public boolean esOpcional(){
+        return this.esOpcional.isSelected();
+    }
     /**
      * @param args the command line arguments
      */
