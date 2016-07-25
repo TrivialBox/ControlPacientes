@@ -1,4 +1,4 @@
-package com.trivialbox.controlpacientes.dao;
+package com.trivialbox.controlpacientes.dao.exceptions;
 
 public class UsuarioEncuestaNoEncontradoException extends RuntimeException {
 

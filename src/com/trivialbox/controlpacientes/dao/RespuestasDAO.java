@@ -1,5 +1,8 @@
 package com.trivialbox.controlpacientes.dao;
 
+import com.trivialbox.controlpacientes.dao.exceptions.EncuestaYaRespondidaException;
+import com.trivialbox.controlpacientes.dao.exceptions.EncuestaNoPermitidaException;
+import com.trivialbox.controlpacientes.dao.exceptions.UsuarioEncuestaNoEncontradoException;
 import com.trivialbox.controlpacientes.dao.db.DataBase;
 import com.trivialbox.controlpacientes.dao.db.ObjectField;
 import com.trivialbox.controlpacientes.dao.db.TablaDB;
