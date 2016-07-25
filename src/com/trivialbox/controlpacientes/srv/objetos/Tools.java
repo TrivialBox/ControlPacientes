@@ -19,6 +19,11 @@ public class Tools {
         return formato.format(respuesta.getTime());
     }
     
+    public static String calendarToDateString(Calendar respuesta) {
+        SimpleDateFormat formato = new SimpleDateFormat("dd/MM/yyyy");
+        return formato.format(respuesta.getTime());
+    }
+    
     public static String encryptPassword(String password) {
         MessageDigest md;
         String encryptMsg = null;
@@ -67,7 +72,7 @@ public class Tools {
         return new ArrayList<>(Arrays.asList(aux));
     }
     
-   public boolean validarCedula(String cedula) throws CedulaNoValidaException {
+    public boolean validarCedula(String cedula) throws CedulaNoValidaException {
         boolean cedulaCorrecta = false;
         try {
             if (cedula.length() == 10){
@@ -106,5 +111,5 @@ public class Tools {
             throw new CedulaNoValidaException(cedula);
         }
         return cedulaCorrecta;
-}
+    }
 }
