@@ -174,8 +174,8 @@ public class DataBase {
         }
     }
     
-    public TablaDB select(List<String> tablesName, String colName, String value) {
-        String query = Sentence.select(tablesName, colName, value);
+    public TablaDB select(List<String> tablesName, List<ObjectField> fields) {
+        String query = Sentence.select(tablesName, fields);
         TablaDB result = consult(query);
         return result;
     }

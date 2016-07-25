@@ -156,12 +156,12 @@ public class Sentence {
                 "WHERE" + " " + "TABLE_NAME" + "=" + "'" + tableName + "'";
         return query;
     }
-
-    static String select(List<String> tablesName, String colName, String value) {
+   
+    static String select(List<String> tablesName, List<ObjectField> fields) {
         String query;
-        query = "SELECT" + " " +  "*" + " " +
+        query = "SELECT" + " " + "*" + " " +
                 "FROM" + " " + join(tablesName, ", ") + " " +
-                "WHERE" + " " + getCondition(tablesName, colName, value);
+                "WHERE" + " " + getCondition(tablesName, fields);
         return query;
     }
     
@@ -183,10 +183,11 @@ public class Sentence {
         return result.toString();
     }
 
-    private static String getCondition(List<String> tablesName, String colName, String value) {
+    private static String getCondition(List<String> tablesName, List<ObjectField> fields) {
         StringJoiner condition = new StringJoiner(" AND ");
         for (String table : tablesName)
-            condition.add(table + "." + colName + "=" + "'" + value + "'");
+            for (ObjectField field : fields)
+                condition.add(table + "." + field.getName() + "=" + "'" + field.getValue() + "'");
         return condition.toString();
     }
 
