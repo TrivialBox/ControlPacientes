@@ -1,7 +1,9 @@
-package com.trivialbox.controlpacientes.srv.objetos;
+package com.trivialbox.controlpacientes.srv;
 
 import com.trivialbox.controlpacientes.dao.AdministradoresDAO;
 import com.trivialbox.controlpacientes.srv.exceptions.CedulaNoValidaException;
+import com.trivialbox.controlpacientes.srv.objetos.Administrador;
+import com.trivialbox.controlpacientes.srv.objetos.Tools;
 import java.util.List;
 
 /**
