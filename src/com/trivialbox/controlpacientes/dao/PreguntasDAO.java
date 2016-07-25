@@ -216,7 +216,7 @@ public class PreguntasDAO {
     private int getIdEncuestaFromNombre(String nombreEncuesta) {
         int idEncuesta;
         ArrayList<String> table = new ArrayList<>();
-        table.add("Pregunta");
+        table.add("Encuesta");
         ArrayList<ObjectField> fields = new ArrayList<>();
         fields.add(new ObjectField("nombre", nombreEncuesta));
         
