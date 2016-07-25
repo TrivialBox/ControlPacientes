@@ -1,8 +1,10 @@
 package com.trivialbox.controlpacientes.gui;
 
+import com.trivialbox.controlpacientes.srv.PreguntaTextualSrv;
 import java.beans.PropertyVetoException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -134,19 +136,54 @@ public class VentanaPreguntas extends javax.swing.JFrame {
             Logger.getLogger(VentanaPreguntas.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_comboBoxTipoPreguntaActionPerformed
-
+    private void agregarPreguntaTextual(){
+        String titulo = preguntaTextual.obtenetTitulo();
+        String nombreEncuesta = this.labelNombreEncuesta.getText();
+        boolean esOpcional = preguntaTextual.esOpcional();
+        String tipoPatron = preguntaTextual.tipoRespuesta();
+        int maxCaracteres;
+        
+        if(preguntaTextual.activarNumMaxCaracteres())
+            maxCaracteres = preguntaTextual.obtenerNumCaracteres();
+        else
+            maxCaracteres = 0;
+        
+        PreguntaTextualSrv preguntaTextualSrv = new PreguntaTextualSrv();
+        try{
+            preguntaTextualSrv.agregarPreguntaTextual(nombreEncuesta, titulo, esOpcional, maxCaracteres, tipoPatron);
+            JOptionPane.showMessageDialog(preguntaBooleana, "Pregunta AgregadaS");
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(preguntaBooleana, e);
+        }
+        
+        
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
-        VentanaPreguntaNumerica pregunta = new VentanaPreguntaNumerica();
-        this.ventanaPregunta.add(pregunta);
+        String textComboBoxType = this.comboBoxTipoPregunta.getSelectedItem().toString();
+        this.ventanaPregunta.removeAll();
+        
+        switch (textComboBoxType){
+            case "Pregunta Texto":
+                agregarPreguntaTextual();
+            break;
+            case "Pregunta Numérica":
 
-        try {
-            pregunta.setMaximum(true);
-        } catch (PropertyVetoException ex) {
-            Logger.getLogger(VentanaPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+            break;
+            case "Pregunta Booleana":
+
+            break;
+            case "Pregunta Fecha":
+
+            break;
+            case "Pregunta Hora":
+
+            break;
+            case "Pregunta Opción multiple":
+
+            break;
         }
-        pregunta.setVisible(true);
-        System.out.println("hola mundo");
+        
     }//GEN-LAST:event_jButton2ActionPerformed
 
     /**
