@@ -1,8 +1,12 @@
 package com.trivialbox.controlpacientes.gui;
 
+import com.trivialbox.controlpacientes.srv.LoginSrv;
+import javax.swing.JOptionPane;
+
 public class Login extends javax.swing.JFrame {
     private final MensajeHolder mensajeHolder = new MensajeHolder();
     private final DisenioHolder disenioHolder = new DisenioHolder();
+    LoginSrv loginSrv;
     /**
      * Creates new form Login
      */
@@ -24,7 +28,7 @@ public class Login extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jComboBox1 = new javax.swing.JComboBox<>();
+        tipoUsuario = new javax.swing.JComboBox<String>();
         textCedula = new javax.swing.JTextField();
         textPassword = new javax.swing.JPasswordField();
         jLabel2 = new javax.swing.JLabel();
@@ -37,13 +41,13 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Paciente", "Usuario" }));
-        jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+        tipoUsuario.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Paciente", "Administrador" }));
+        tipoUsuario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jComboBox1ActionPerformed(evt);
+                tipoUsuarioActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 240, -1));
+        getContentPane().add(tipoUsuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 100, 240, -1));
 
         textCedula.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(java.awt.event.FocusEvent evt) {
@@ -100,9 +104,9 @@ public class Login extends javax.swing.JFrame {
 
     }//GEN-LAST:event_textCedulaFocusLost
 
-    private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
+    private void tipoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tipoUsuarioActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComboBox1ActionPerformed
+    }//GEN-LAST:event_tipoUsuarioActionPerformed
 
     private void textCedulaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textCedulaMouseClicked
         disenioHolder.click(textCedula, mensajeHolder.getCedula());
@@ -118,8 +122,22 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_textPasswordMouseClicked
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
-        ventanaAdmin.setVisible(true);
+        loginSrv = new LoginSrv();
+        String cedula = this.textCedula.getText();
+        String password = this.textPassword.getText();
+        
+        if(this.tipoUsuario.getSelectedItem().equals("Administrador")){
+            try{
+                loginSrv.autenticarAdmin(cedula, password);
+                VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+                ventanaAdmin.setVisible(true);
+                this.dispose();
+            }catch(Exception e){
+                JOptionPane.showMessageDialog(rootPane, e.getMessage());
+            }
+        }
+        
+        
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
@@ -160,11 +178,11 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptar;
     private javax.swing.JButton jButton2;
-    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JTextField textCedula;
     private javax.swing.JPasswordField textPassword;
+    private javax.swing.JComboBox<String> tipoUsuario;
     // End of variables declaration//GEN-END:variables
 }
