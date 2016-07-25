@@ -30,6 +30,10 @@ public class TablaDB implements Iterable<RowDB>{
     public ArrayList<RowDB> getRows() {
         return rows;
     }
+    
+    public boolean isEmpty() {
+        return rows.isEmpty();
+    }
 
     @Override
     public Iterator<RowDB> iterator() {

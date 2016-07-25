@@ -16,8 +16,6 @@ public class VentanaPreguntas extends javax.swing.JFrame {
     private VentanaPreguntaHora preguntaHora;
     private VentanaPreguntaOpcional preguntaOpcional;
     
-    private final MensajeHolder mensajeHolder = new MensajeHolder();
-    private final DisenioHolder disenioHolder = new DisenioHolder();
     static String nombreEncuesta;
     
     /**
@@ -26,15 +24,11 @@ public class VentanaPreguntas extends javax.swing.JFrame {
      */
     public VentanaPreguntas(String nombreEncuesta) {
         initComponents();
-        iniciarHolder();
+
         this.nombreEncuesta = nombreEncuesta;
+        this.labelNombreEncuesta.setText(nombreEncuesta);
     }
     
-    private void iniciarHolder(){
-        
-        mensajeHolder.setCedula("Nombre Formulario");
-        disenioHolder.mensaje(textNombreEncuesta, mensajeHolder.getCedula(), 0);
-    }
     
     /**
      * This method is called from within the constructor to initialize the form.
@@ -45,32 +39,15 @@ public class VentanaPreguntas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        textNombreEncuesta = new javax.swing.JTextField();
-        comboBoxTipoPregunta = new javax.swing.JComboBox<>();
+        comboBoxTipoPregunta = new javax.swing.JComboBox<String>();
         ventanaPregunta = new javax.swing.JDesktopPane();
         jButton2 = new javax.swing.JButton();
         jButton1 = new javax.swing.JButton();
+        labelNombreEncuesta = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        textNombreEncuesta.setBackground(new java.awt.Color(223, 216, 216));
-        textNombreEncuesta.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                textNombreEncuestaFocusLost(evt);
-            }
-        });
-        textNombreEncuesta.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                textNombreEncuestaMouseClicked(evt);
-            }
-        });
-        textNombreEncuesta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                textNombreEncuestaActionPerformed(evt);
-            }
-        });
-
-        comboBoxTipoPregunta.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Pregunta Texto", "Pregunta Numérica", "Pregunta Booleana", "Pregunta Fecha", "Pregunta Hora", "Pregunta Opción multiple" }));
+        comboBoxTipoPregunta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pregunta Texto", "Pregunta Numérica", "Pregunta Booleana", "Pregunta Fecha", "Pregunta Hora", "Pregunta Opción multiple" }));
         comboBoxTipoPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 comboBoxTipoPreguntaActionPerformed(evt);
@@ -88,6 +65,8 @@ public class VentanaPreguntas extends javax.swing.JFrame {
         jButton1.setForeground(new java.awt.Color(1, 1, 1));
         jButton1.setText("Enviar");
 
+        labelNombreEncuesta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -95,8 +74,8 @@ public class VentanaPreguntas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
-                        .addComponent(textNombreEncuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 254, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap()
+                        .addComponent(labelNombreEncuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
@@ -114,8 +93,8 @@ public class VentanaPreguntas extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(36, 36, 36)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(textNombreEncuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labelNombreEncuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(34, 34, 34)
                 .addComponent(comboBoxTipoPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
@@ -127,19 +106,6 @@ public class VentanaPreguntas extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void textNombreEncuestaFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_textNombreEncuestaFocusLost
-        disenioHolder.mensaje(textNombreEncuesta, mensajeHolder.getCedula(),
-            textNombreEncuesta.getText().trim().length());
-    }//GEN-LAST:event_textNombreEncuestaFocusLost
-
-    private void textNombreEncuestaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_textNombreEncuestaMouseClicked
-        disenioHolder.click(textNombreEncuesta, mensajeHolder.getCedula());
-    }//GEN-LAST:event_textNombreEncuestaMouseClicked
-
-    private void textNombreEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textNombreEncuestaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_textNombreEncuestaActionPerformed
 
     private void comboBoxTipoPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_comboBoxTipoPreguntaActionPerformed
         String textComboBoxType = this.comboBoxTipoPregunta.getSelectedItem().toString();
@@ -241,7 +207,7 @@ public class VentanaPreguntas extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comboBoxTipoPregunta;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JTextField textNombreEncuesta;
+    private javax.swing.JLabel labelNombreEncuesta;
     private javax.swing.JDesktopPane ventanaPregunta;
     // End of variables declaration//GEN-END:variables
 }
