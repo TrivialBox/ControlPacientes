@@ -96,4 +96,17 @@ public class EncuestasDAO {
         String[] exceptions = new String[] {"idEncuesta"};
         return new ArrayList<>(Arrays.asList(exceptions));
     }
+    
+    public int getIdEncuestaFromNombre(String nombreEncuesta) {
+        int idEncuesta;
+        ArrayList<String> table = new ArrayList<>();
+        table.add("Encuesta");
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("nombre", nombreEncuesta));
+        
+        TablaDB result = dataBase.select(table, fields);
+        
+        idEncuesta = Integer.parseInt(result.getRow(0).getField(0));
+        return idEncuesta;
+    }
 }
