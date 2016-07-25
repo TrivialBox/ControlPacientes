@@ -29,6 +29,14 @@ class Opciones {
     public int getNumMaxSelecciones() {
         return numMaxSelecciones;
     }
+
+    public int getNumSelecciones() {
+        return numMaxSelecciones - numeroSeleccionados;
+    }
+    
+    public List<String> getOpciones() {
+        return new ArrayList<>(opciones.keySet());
+    }
     
     public void addOpcion(String opcion) {
         if (opciones.get(opcion) != null)

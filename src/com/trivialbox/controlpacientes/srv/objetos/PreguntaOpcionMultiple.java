@@ -25,6 +25,18 @@ public class PreguntaOpcionMultiple extends Pregunta<String, List<Opcion>> {
         return opciones.getNumMaxSelecciones();
     }
     
+    public boolean tieneCampoAdicional() {
+        return opciones.tieneCampoAdicional;
+    }
+    
+    public List<String> getOpciones() {
+        return opciones.getOpciones();
+    }
+    
+    public int getNumCamposSeleccionados() {
+        return opciones.getNumSelecciones();
+    }
+    
     public void addOpcion(String opcion) {
         opciones.addOpcion(opcion);
     }
