@@ -14,15 +14,20 @@ public class VentanaPreguntas extends javax.swing.JFrame {
     private VentanaPreguntaBooleana preguntaBooleana;
     private VentanaPreguntaFecha pregunraFecha;
     private VentanaPreguntaHora preguntaHora;
+    private VentanaPreguntaOpcional preguntaOpcional;
     
     private final MensajeHolder mensajeHolder = new MensajeHolder();
     private final DisenioHolder disenioHolder = new DisenioHolder();
+    static String nombreEncuesta;
+    
     /**
      * Creates new form VentanaPreguntas
+     * @param nombreEncuesta
      */
-    public VentanaPreguntas() {
+    public VentanaPreguntas(String nombreEncuesta) {
         initComponents();
         iniciarHolder();
+        this.nombreEncuesta = nombreEncuesta;
     }
     
     private void iniciarHolder(){
@@ -172,7 +177,10 @@ public class VentanaPreguntas extends javax.swing.JFrame {
                 preguntaHora.setMaximum(true);
                 break;
                 case "Pregunta Opción multiple":
-                System.out.println("multiple");
+                preguntaOpcional = new VentanaPreguntaOpcional();
+                this.ventanaPregunta.add(preguntaOpcional);
+                preguntaOpcional.setVisible(true);
+                preguntaOpcional.setMaximum(true);
                 break;
             }
         }catch (PropertyVetoException ex) {
@@ -224,7 +232,7 @@ public class VentanaPreguntas extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new VentanaPreguntas().setVisible(true);
+                new VentanaPreguntas(nombreEncuesta).setVisible(true);
             }
         });
     }
