@@ -325,9 +325,13 @@ public class PreguntasDAO {
     }
 
     private Pregunta addOpcionMultiple(PreguntaOpcionMultiple pregunta) {      
+        
+        String idPregunta = getIdPregunta(pregunta);
+        
         ArrayList<ObjectField> fieldsPregunta = new ArrayList<>(getExtraFields(pregunta));
         fieldsPregunta.add(new ObjectField("numMaxSelecciones", Integer.toString(pregunta.getNumMaxSelecciones())));
         fieldsPregunta.add(new ObjectField("tieneCampoAdicional", pregunta.tieneCampoAdicional() ? "1" : "0"));
+        fieldsPregunta.add(new ObjectField("idPregunta", idPregunta));
         
         dataBase.insert(
                 "preguntaOpcionMultiple",
@@ -337,7 +341,7 @@ public class PreguntasDAO {
         for (String opcion : pregunta.getOpciones()) {
             ArrayList<ObjectField> fieldsOpcion = new ArrayList<>();
             fieldsOpcion.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
-            fieldsOpcion.add(new ObjectField("idPregunta", getIdPregunta(pregunta)));
+            fieldsOpcion.add(new ObjectField("idPregunta", idPregunta));
             fieldsOpcion.add(new ObjectField("nombre", opcion));
 
             dataBase.insert(
