@@ -31,7 +31,7 @@ public class Tools {
             md = MessageDigest.getInstance("SHA-1");
             encryptMsg = DatatypeConverter.printHexBinary(md.digest(password.getBytes("UTF-8")));
         } catch (NoSuchAlgorithmException | UnsupportedEncodingException ex) {
-            // Todo ok
+            // Tod-o ok
         }
         return encryptMsg;
     }
@@ -62,7 +62,7 @@ public class Tools {
                 }
             }
         } catch (IllegalArgumentException | IllegalAccessException ex) {
-            // Todo esta bien
+            // Tod-o esta bien
         }
         return fields;
     }

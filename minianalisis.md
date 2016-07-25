@@ -49,7 +49,7 @@ Una encuesta conteniene las preguntas individuales (id, enunciado, respuesta). L
 
 #### Pregunta de opción múltiple
 
-> Como respuesta se tiene una una o varias opciones de una lista de opciones definidas por el encuestador, también existe la opción de poner una opción adicional para que el encuestado llene a criterio personal. Se puede restringir el número másimo de respuestas selecciondas, en caso de que se restringa una sola respuesta se presenta un combo box (list box).
+> Como respuesta se tiene una una o varias opciones de una lista de opciones definidas por el encuestador, también existe la opción de poner una opción adicional para que el encuestado llene a criterio personal. Se puede restringir el número máximo de respuestas seleccionadas, en caso de que se restringa una sola respuesta se presenta un combo box (list box).
 
 #### Pregunta fecha
 
