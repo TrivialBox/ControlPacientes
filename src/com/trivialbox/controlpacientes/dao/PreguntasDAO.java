@@ -206,7 +206,8 @@ public class PreguntasDAO {
                 r.getField(6).compareTo("1") == 0
         );
         
-        // TODO falta de construir
+        for (String opcion : getOpciones(pregunta.getIdEncuesta(), pregunta.getIdPregunta()))
+            pregunta.addOpcion(opcion);
         
         return pregunta;
     }
@@ -237,6 +238,23 @@ public class PreguntasDAO {
 
     public List<Pregunta> get() {
         return null;
+    }
+
+    private List<String> getOpciones(int idEncuesta, int idPregunta) {
+        ArrayList<String> tabla = new ArrayList<>();
+        tabla.add("Opcion");
+        
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idEncuesta", Integer.toString(idEncuesta)));
+        fields.add(new ObjectField("idPregunta", Integer.toString(idPregunta)));
+        
+        TablaDB result = dataBase.select(tabla, fields);
+        
+        ArrayList<String> opciones = new ArrayList<>();
+        
+        for (RowDB row : result)
+            opciones.add(row.getField(3));
+        return opciones;
     }
     
 }
