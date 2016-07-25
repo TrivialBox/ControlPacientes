@@ -1,6 +1,5 @@
 package com.trivialbox.controlpacientes.gui;
 
-
 public class Login extends javax.swing.JFrame {
     private final MensajeHolder mensajeHolder = new MensajeHolder();
     private final DisenioHolder disenioHolder = new DisenioHolder();
@@ -119,8 +118,8 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_textPasswordMouseClicked
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        VentanaPreguntas ventanaRespuestas = new VentanaPreguntas();
-        ventanaRespuestas.setVisible(true);
+        VentanaAdministrador ventanaAdmin = new VentanaAdministrador();
+        ventanaAdmin.setVisible(true);
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     /**
