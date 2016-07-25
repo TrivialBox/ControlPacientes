@@ -1,12 +1,19 @@
 package com.trivialbox.controlpacientes;
 
+import com.trivialbox.controlpacientes.dao.EncuestasDAO;
+import com.trivialbox.controlpacientes.dao.LoginDAO;
 import com.trivialbox.controlpacientes.gui.Login;
+import com.trivialbox.controlpacientes.srv.objetos.Encuesta;
 import javax.swing.UIManager;
 
 public class ControlPacientes {
 
     public static void main(String[] args) {
         setLookAndFeel();
+        //LoginDAO.autenticarAdmin("1105129686", "1234");
+  
+        
+        
         Login login = new Login();
         login.setVisible(true);
     }

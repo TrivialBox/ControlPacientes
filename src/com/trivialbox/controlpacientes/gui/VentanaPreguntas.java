@@ -27,9 +27,19 @@ public class VentanaPreguntas extends javax.swing.JFrame {
 
         this.nombreEncuesta = nombreEncuesta;
         this.labelNombreEncuesta.setText(nombreEncuesta);
+        inicioVentanaPregunta();
     }
     
-    
+    private void inicioVentanaPregunta() {
+        VentanaIncioPreguntas ventana = new VentanaIncioPreguntas();
+        this.ventanaPregunta.add(ventana);
+        ventana.setVisible(true);
+        try {
+            ventana.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(VentanaPreguntas.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -42,10 +52,12 @@ public class VentanaPreguntas extends javax.swing.JFrame {
         comboBoxTipoPregunta = new javax.swing.JComboBox<String>();
         ventanaPregunta = new javax.swing.JDesktopPane();
         jButton2 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
         labelNombreEncuesta = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         comboBoxTipoPregunta.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Pregunta Texto", "Pregunta Numérica", "Pregunta Booleana", "Pregunta Fecha", "Pregunta Hora", "Pregunta Opción multiple" }));
         comboBoxTipoPregunta.addActionListener(new java.awt.event.ActionListener() {
@@ -53,6 +65,8 @@ public class VentanaPreguntas extends javax.swing.JFrame {
                 comboBoxTipoPreguntaActionPerformed(evt);
             }
         });
+        getContentPane().add(comboBoxTipoPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(534, 100, 250, -1));
+        getContentPane().add(ventanaPregunta, new org.netbeans.lib.awtextra.AbsoluteConstraints(174, 141, 610, 325));
 
         jButton2.setText("Agregar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -60,49 +74,16 @@ public class VentanaPreguntas extends javax.swing.JFrame {
                 jButton2ActionPerformed(evt);
             }
         });
-
-        jButton1.setFont(new java.awt.Font("Cantarell", 0, 16)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(1, 1, 1));
-        jButton1.setText("Enviar");
+        getContentPane().add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(802, 141, -1, 30));
 
         labelNombreEncuesta.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        getContentPane().add(labelNombreEncuesta, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 308, 30));
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(labelNombreEncuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(174, 174, 174)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(comboBoxTipoPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(ventanaPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 610, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(86, 86, 86)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(36, 36, 36)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labelNombreEncuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(34, 34, 34)
-                .addComponent(comboBoxTipoPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(21, 21, 21)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(ventanaPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 325, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/com/trivialbox/controlpacientes/imagenes/cEmdNf9 - Imgur.png"))); // NOI18N
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, -1));
+
+        jLabel2.setText("Trivial Box 2016");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(890, 500, -1, -1));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -205,8 +186,9 @@ public class VentanaPreguntas extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<String> comboBoxTipoPregunta;
-    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel labelNombreEncuesta;
     private javax.swing.JDesktopPane ventanaPregunta;
     // End of variables declaration//GEN-END:variables
