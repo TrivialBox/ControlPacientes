@@ -72,7 +72,7 @@ public class Tools {
         return new ArrayList<>(Arrays.asList(aux));
     }
     
-    public boolean validarCedula(String cedula) throws CedulaNoValidaException {
+    public static boolean validarCedula(String cedula) throws CedulaNoValidaException {
         boolean cedulaCorrecta = false;
         try {
             if (cedula.length() == 10){
