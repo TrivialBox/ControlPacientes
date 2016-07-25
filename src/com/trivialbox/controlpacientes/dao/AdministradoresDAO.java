@@ -29,7 +29,9 @@ public class AdministradoresDAO {
     public Administrador get(String cedula) {
         Administrador administrador;
         String[] tables = new String[]{"Persona", "Administrador"};
-        TablaDB result = dataBase.select(Arrays.asList(tables), "idpersona", cedula);
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idpersona", cedula));
+        TablaDB result = dataBase.select(Arrays.asList(tables), fields);
         administrador = construirAdministrador(result, 0);
         return administrador;
     }
@@ -134,4 +136,5 @@ public class AdministradoresDAO {
         extraFields.add(new ObjectField("idpersona", administrador.getIdPersona()));
         return extraFields;
     }
+
 }

@@ -28,7 +28,9 @@ public class EncuestasDAO {
     public Encuesta get(String nombre) {
         Encuesta encuesta;
         String[] tables = new String[]{"Encuesta"};
-        TablaDB result = dataBase.select(Arrays.asList(tables), "nombre", nombre);
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("nombre", nombre));
+        TablaDB result = dataBase.select(Arrays.asList(tables), fields);
         encuesta = construirEncuesta(result, 0);
         return encuesta;
     }

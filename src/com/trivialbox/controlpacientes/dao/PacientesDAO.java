@@ -29,7 +29,9 @@ public class PacientesDAO {
     public Paciente get(String cedula) {
         Paciente paciente;
         String[] tables = new String[]{"Persona", "Paciente"};
-        TablaDB result = dataBase.select(Arrays.asList(tables), "idpersona", cedula);
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idpersona", cedula));
+        TablaDB result = dataBase.select(Arrays.asList(tables), fields);
         paciente = construirPaciente(result, 0);
         return paciente;
     }
