@@ -1,7 +1,13 @@
 package com.trivialbox.controlpacientes.gui;
 
+import com.trivialbox.controlpacientes.srv.PreguntaBooleanaSrv;
+import com.trivialbox.controlpacientes.srv.PreguntaFechaSrv;
+import com.trivialbox.controlpacientes.srv.PreguntaHoraSrv;
+import com.trivialbox.controlpacientes.srv.PreguntaNumericaSrv;
+import com.trivialbox.controlpacientes.srv.PreguntaOpcionalSrv;
 import com.trivialbox.controlpacientes.srv.PreguntaTextualSrv;
 import java.beans.PropertyVetoException;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -138,7 +144,6 @@ public class VentanaPreguntas extends javax.swing.JFrame {
     }//GEN-LAST:event_comboBoxTipoPreguntaActionPerformed
     private void agregarPreguntaTextual(){
         String titulo = preguntaTextual.obtenetTitulo();
-        String nombreEncuesta = this.labelNombreEncuesta.getText();
         boolean esOpcional = preguntaTextual.esOpcional();
         String tipoPatron = preguntaTextual.tipoRespuesta();
         int maxCaracteres;
@@ -151,12 +156,83 @@ public class VentanaPreguntas extends javax.swing.JFrame {
         PreguntaTextualSrv preguntaTextualSrv = new PreguntaTextualSrv();
         try{
             preguntaTextualSrv.agregarPreguntaTextual(nombreEncuesta, titulo, esOpcional, maxCaracteres, tipoPatron);
-            JOptionPane.showMessageDialog(preguntaBooleana, "Pregunta AgregadaS");
+            JOptionPane.showMessageDialog(preguntaBooleana, "Pregunta Agregada");
         }catch(Exception e){
             JOptionPane.showMessageDialog(preguntaBooleana, e);
         }
+
+    }
+    private void agregarPreguntaNumerica(){
+        String titulo = preguntaNumerica.obtenerTituloPregunta();
+        boolean esOpcional = preguntaNumerica.esOpcional();
+        boolean esIntervaloDiscreto = preguntaNumerica.esIntervaloDiscreto();
+        int limiteSuperior = preguntaNumerica.obtenerLimiteSuperior();
+        int limiteInferior = preguntaNumerica.obtenerLimiteSuperior();
         
+        PreguntaNumericaSrv preguntaNumerica = new PreguntaNumericaSrv();
+        try {
+            preguntaNumerica.agregarPregunta(titulo, limiteSuperior, limiteInferior, esOpcional, esIntervaloDiscreto, nombreEncuesta);
+            JOptionPane.showMessageDialog(preguntaBooleana, "Pregunta Agregada");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(preguntaBooleana, e);
+        }
+
+    }
+    private void agregarPreguntaBooleana(){
+        String titulo = preguntaBooleana.obtenerTituloPregunta();
+        boolean esOpcional = preguntaBooleana.esOpcional();
         
+        PreguntaBooleanaSrv preguntaBooleanaSrv = new PreguntaBooleanaSrv();
+        
+        try {
+            preguntaBooleanaSrv.agregarPregunta(titulo, esOpcional, nombreEncuesta);
+            JOptionPane.showMessageDialog(preguntaBooleana, "Pregunta Agregada");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(preguntaBooleana, e);
+        }
+        
+    }
+    private void agregarPreguntafecha(){
+        String titulo = pregunraFecha.obtenerTituloPregunta();
+        boolean esOpcional = pregunraFecha.esOpcional();
+        
+        PreguntaFechaSrv preguntaFechaSrv = new PreguntaFechaSrv();
+        
+        try {
+            preguntaFechaSrv.agregarPregunta(titulo, esOpcional, nombreEncuesta);
+            JOptionPane.showMessageDialog(preguntaBooleana, "Pregunta Agregada");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(preguntaBooleana, e);
+        }
+    }
+    private void agregarPreguntaHora(){
+        String titulo = preguntaHora.obtenerTituloPregunta();
+        boolean esOpcional = preguntaHora.esOpcional();
+        
+        PreguntaHoraSrv preguntaHoraSrv = new PreguntaHoraSrv();
+        
+        try {
+            preguntaHoraSrv.agregarPregunta(titulo, esOpcional, nombreEncuesta);
+            JOptionPane.showMessageDialog(preguntaBooleana, "Pregunta Agregada");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(preguntaBooleana, e);
+        }
+    }
+    
+    private void agregarPreguntaOpcional(){
+        String titulo = preguntaOpcional.obtenerTituloPregunta();
+        boolean esOpcional = preguntaOpcional.esOpcional();
+        int numMaxSeleciones = preguntaOpcional.obtenerNumMaxOpciones();
+        boolean tieneCampoAdicional = preguntaOpcional.puedeAgregarOpciones();
+        ArrayList<String> opciones = preguntaOpcional.obtenerOpciones();
+        
+        PreguntaOpcionalSrv preguntaOpcionalSrv = new PreguntaOpcionalSrv();
+        try {
+            preguntaOpcionalSrv.agregarPregunta(titulo, esOpcional, numMaxSeleciones, tieneCampoAdicional, opciones, nombreEncuesta);
+            JOptionPane.showMessageDialog(preguntaBooleana, "Pregunta Agregada");
+        } catch (Exception e){
+            JOptionPane.showMessageDialog(preguntaBooleana, e);
+        }
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
 
@@ -168,19 +244,19 @@ public class VentanaPreguntas extends javax.swing.JFrame {
                 agregarPreguntaTextual();
             break;
             case "Pregunta Numérica":
-
+                agregarPreguntaNumerica();
             break;
             case "Pregunta Booleana":
-
+                agregarPreguntaBooleana();
             break;
             case "Pregunta Fecha":
-
+                agregarPreguntafecha();
             break;
             case "Pregunta Hora":
-
+                agregarPreguntaHora();
             break;
             case "Pregunta Opción multiple":
-
+                agregarPreguntaOpcional();
             break;
         }
         
