@@ -279,7 +279,9 @@ public class PreguntasDAO {
             if (pregunta instanceof PreguntaOpcionMultiple)
                 return addOpcionMultiple((PreguntaOpcionMultiple) pregunta);
             
-            List<ObjectField> fieldsPregunta = Tools.getValues(pregunta, null);
+            ArrayList<String> excludes = getExcludes(pregunta);
+            
+            List<ObjectField> fieldsPregunta = Tools.getValues(pregunta, excludes);
             fieldsPregunta.addAll(getExtraFields(pregunta));
             dataBase.insert(
                     Tools.getObjectName(pregunta),
@@ -341,5 +343,22 @@ public class PreguntasDAO {
             );
         }
         return pregunta;
+    }
+
+    private ArrayList<String> getExcludes(Pregunta pregunta) {
+        ArrayList<String> excludes = new ArrayList<>();
+        if (pregunta instanceof PreguntaNumerica) {
+            excludes.add("idPregunta");
+        } else if (pregunta instanceof PreguntaTextual) {
+            
+        } else if (pregunta instanceof PreguntaBooleana) {
+            
+        } else if (pregunta instanceof PreguntaFecha) {
+            
+        } else if (pregunta instanceof PreguntaHora) {
+            
+        } else if (pregunta instanceof PreguntaOpcionMultiple) {
+        }
+        return excludes;
     }
 }
