@@ -33,16 +33,7 @@ public class RespuestasDAO {
             instance = new RespuestasDAO();
         return instance;
     }
-    
-    /**
-     * Todas las respuestas de una encuesta.
-     * @param nombreEncuesta
-     * @return 
-     */
-    public List<Pregunta> get(String nombreEncuesta) {
-        return null;
-    }
-    
+       
     /**
      * Todas las respuestas de una pregunta.
      * @param nombreEncuesta
@@ -50,7 +41,25 @@ public class RespuestasDAO {
      * @return 
      */
     public List<Pregunta> get(String nombreEncuesta, int idPregunta) {
-        return null;
+        ArrayList<Pregunta> preguntasContestadas = new ArrayList<>();
+        int idEncuesta = EncuestasDAO.getInstance().getIdEncuestaFromNombre(nombreEncuesta);
+        
+        ArrayList<String> table = new ArrayList<>();
+        table.add("Respuesta");
+        
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idEncuesta", Integer.toString(idEncuesta)));
+        fields.add(new ObjectField("idPregunta", Integer.toString(idPregunta)));
+        
+        TablaDB result = dataBase.select(table, fields);
+        
+        for (RowDB row : result) {
+            Pregunta pregunta = PreguntasDAO.getInstance().get(nombreEncuesta, idPregunta);
+            responderPregunta(pregunta, row);
+            preguntasContestadas.add(pregunta);
+        }
+        
+        return preguntasContestadas;
     }
     
     /**
@@ -60,7 +69,26 @@ public class RespuestasDAO {
      * @return 
      */
     public List<Pregunta> get(String nombreEncuesta, String idPaciente) {
-        return null;
+        ArrayList<Pregunta> preguntasContestadas = new ArrayList<>();
+        int idEncuesta = EncuestasDAO.getInstance().getIdEncuestaFromNombre(nombreEncuesta);
+        /*
+        ArrayList<String> table = new ArrayList<>();
+        table.add("Respuesta");
+        
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idEncuesta", Integer.toString(idEncuesta)));
+        fields.add(new ObjectField("idPregunta", Integer.toString(idPregunta)));
+        
+        TablaDB result = dataBase.select(table, fields);
+        
+        for (RowDB row : result) {
+            Pregunta pregunta = PreguntasDAO.getInstance().get(nombreEncuesta, idPregunta);
+            responderPregunta(pregunta, row);
+            preguntasContestadas.add(pregunta);
+        }
+        */
+        
+        return preguntasContestadas;
     }
     
     /**
@@ -190,7 +218,7 @@ public class RespuestasDAO {
         
         fields.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
         fields.add(new ObjectField("idPregunta", Integer.toString(pregunta.getIdPregunta())));
-
+        
         TablaDB resultOpciones = dataBase.select(table, fields);
         
         for (Opcion opcion : pregunta.getRespuesta()) {
@@ -209,5 +237,79 @@ public class RespuestasDAO {
                 return row.getField(0);
         // TODO Crear nueva opcion
         return null;
+    }
+
+    private void responderPregunta(Pregunta pregunta, RowDB row) {
+        if (pregunta instanceof PreguntaBooleana)
+            responderPreguntaBooleana((PreguntaBooleana) pregunta, row);
+        else if (pregunta instanceof PreguntaFecha)
+            responderPreguntaFecha((PreguntaFecha) pregunta, row);
+        else if (pregunta instanceof PreguntaHora)
+            responderPreguntaHora((PreguntaHora) pregunta, row);
+        else if (pregunta instanceof PreguntaNumerica)
+            responderPreguntaNumerica((PreguntaNumerica) pregunta, row);
+        else if (pregunta instanceof PreguntaOpcionMultiple)
+            responderPreguntaOpcionMultiple((PreguntaOpcionMultiple) pregunta, row);
+        else if (pregunta instanceof PreguntaTextual)
+            responderPreguntaTextual((PreguntaTextual) pregunta, row);
+    }
+
+    private void responderPreguntaBooleana(PreguntaBooleana pregunta, RowDB row) {
+        ArrayList<String> table = new ArrayList<>();
+        table.add("RespuestaPreguntaBooleana");
+       
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idRespuesta", row.getField(0)));
+        
+        TablaDB r = dataBase.select(table, fields);
+        pregunta.responder(r.getRow(0).getField(1).compareTo("1") == 0);
+    }
+
+    private void responderPreguntaFecha(PreguntaFecha pregunta, RowDB row) {
+        ArrayList<String> table = new ArrayList<>();
+        table.add("RespuestaPreguntaFecha");
+       
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idRespuesta", row.getField(0)));
+        
+        TablaDB r = dataBase.select(table, fields);
+        pregunta.responder(r.getRow(0).getField(1));
+    }
+
+    private void responderPreguntaHora(PreguntaHora pregunta, RowDB row) {
+        ArrayList<String> table = new ArrayList<>();
+        table.add("RespuestaPreguntaHora");
+       
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idRespuesta", row.getField(0)));
+        
+        TablaDB r = dataBase.select(table, fields);
+        pregunta.responder(r.getRow(0).getField(1));
+    }
+
+    private void responderPreguntaNumerica(PreguntaNumerica pregunta, RowDB row) {
+        ArrayList<String> table = new ArrayList<>();
+        table.add("RespuestaPreguntaNumerica");
+       
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idRespuesta", row.getField(0)));
+        
+        TablaDB r = dataBase.select(table, fields);
+        pregunta.responder(Double.parseDouble(r.getRow(0).getField(1)));
+    }
+
+    private void responderPreguntaOpcionMultiple(PreguntaOpcionMultiple pregunta, RowDB row) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    private void responderPreguntaTextual(PreguntaTextual pregunta, RowDB row) {
+        ArrayList<String> table = new ArrayList<>();
+        table.add("RespuestaPreguntaTextual");
+       
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idRespuesta", row.getField(0)));
+        
+        TablaDB r = dataBase.select(table, fields);
+        pregunta.responder(r.getRow(0).getField(1));
     }
 }
