@@ -25,28 +25,28 @@ public class VentanaPreguntaNumerica extends javax.swing.JInternalFrame {
         entryTituloPregunta = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
-        jSpinner1 = new javax.swing.JSpinner();
+        limiteSuperior = new javax.swing.JSpinner();
         jLabel4 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jCheckBox2 = new javax.swing.JCheckBox();
-        jCheckBox1 = new javax.swing.JCheckBox();
-        jSpinner2 = new javax.swing.JSpinner();
+        intervaloEsDiscreto = new javax.swing.JCheckBox();
+        esOpcional = new javax.swing.JCheckBox();
+        limiteInferior = new javax.swing.JSpinner();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Titulo Pregunta");
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Validaciones"));
 
-        jSpinner1.setValue(1);
+        limiteSuperior.setValue(1);
 
         jLabel4.setText("Limite superior");
 
         jLabel3.setText("Limite inferior");
 
-        jCheckBox2.setText("Es intervalo discreto");
+        intervaloEsDiscreto.setText("Es intervalo discreto");
 
-        jCheckBox1.setText("Es opcional");
+        esOpcional.setText("Es opcional");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -59,10 +59,10 @@ public class VentanaPreguntaNumerica extends javax.swing.JInternalFrame {
                     .addComponent(jLabel4))
                 .addGap(262, 262, 262)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1)
-                    .addComponent(jCheckBox2)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(limiteSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(esOpcional)
+                    .addComponent(intervaloEsDiscreto)
+                    .addComponent(limiteInferior, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -71,15 +71,15 @@ public class VentanaPreguntaNumerica extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(limiteSuperior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jSpinner2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(limiteInferior, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(25, 25, 25)
-                .addComponent(jCheckBox2)
+                .addComponent(intervaloEsDiscreto)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jCheckBox1)
+                .addComponent(esOpcional)
                 .addContainerGap(13, Short.MAX_VALUE))
         );
 
@@ -93,11 +93,9 @@ public class VentanaPreguntaNumerica extends javax.swing.JInternalFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(entryTituloPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())))
+                        .addComponent(entryTituloPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 449, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -114,6 +112,23 @@ public class VentanaPreguntaNumerica extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public String obtenerTituloPregunta(){
+        return this.entryTituloPregunta.getText();
+    }
+    public int obtenerLimiteSuperior(){
+        return (int) this.limiteSuperior.getValue();
+        
+    }
+    public int obtenerLimiteInferior(){
+        return (int) this.limiteInferior.getValue();
+    }
+    public boolean esIntervaloDiscreto(){
+        return this.intervaloEsDiscreto.isSelected();
+    }
+    public boolean esOpcional(){
+        return this.esOpcional.isSelected();
+    }
     /**
      * @param args the command line arguments
      */
@@ -152,13 +167,13 @@ public class VentanaPreguntaNumerica extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField entryTituloPregunta;
-    private javax.swing.JCheckBox jCheckBox1;
-    private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox esOpcional;
+    private javax.swing.JCheckBox intervaloEsDiscreto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JSpinner jSpinner1;
-    private javax.swing.JSpinner jSpinner2;
+    private javax.swing.JSpinner limiteInferior;
+    private javax.swing.JSpinner limiteSuperior;
     // End of variables declaration//GEN-END:variables
 }
