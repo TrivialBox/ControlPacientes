@@ -1,6 +1,9 @@
 
 package com.trivialbox.controlpacientes.gui;
 
+import java.util.ArrayList;
+import javax.swing.ComboBoxModel;
+
 
 public class VentanaPreguntaOpcional extends javax.swing.JInternalFrame {
 
@@ -33,11 +36,11 @@ public class VentanaPreguntaOpcional extends javax.swing.JInternalFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        activarNumMAxCaracteres = new javax.swing.JCheckBox();
 
         jCheckBox2.setText("jCheckBox2");
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jLabel1.setText("Titulo Pregunta");
 
@@ -68,6 +71,12 @@ public class VentanaPreguntaOpcional extends javax.swing.JInternalFrame {
 
         jLabel4.setText("Número max de opciones a responder");
 
+        activarNumMAxCaracteres.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                activarNumMAxCaracteresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -90,7 +99,7 @@ public class VentanaPreguntaOpcional extends javax.swing.JInternalFrame {
                     .addComponent(checkOpcionAdicional)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(4, 4, 4)
-                        .addComponent(jCheckBox1)
+                        .addComponent(activarNumMAxCaracteres)
                         .addGap(18, 18, 18)
                         .addComponent(NumMaxOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -111,7 +120,7 @@ public class VentanaPreguntaOpcional extends javax.swing.JInternalFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addComponent(jCheckBox1, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addComponent(activarNumMAxCaracteres, javax.swing.GroupLayout.Alignment.TRAILING))
                     .addComponent(NumMaxOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(37, 37, 37)
                 .addComponent(checkOpcionAdicional)
@@ -149,6 +158,31 @@ public class VentanaPreguntaOpcional extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    
+    public String obtenerTituloPregunta(){
+        return this.entryTituloPregunta.getText();
+    }
+    public boolean esOpcional(){
+        return this.esOpcional.isSelected();
+    }
+    public ArrayList<String> obtenerOpciones(){
+        ComboBoxModel model = this.comboBoxOpciones.getModel();
+        ArrayList<String> listaOpciones = new ArrayList<>();
+        int size = model.getSize();
+        for(int i=0;i<size;i++) {
+            listaOpciones.add((String) model.getElementAt(i));
+        }
+        return listaOpciones;
+    }
+    
+    public int obtenerNumMaxOpciones(){
+        return (int) this.NumMaxOpciones.getValue();
+    }
+    public boolean puedeAgregarOpciones(){
+        return this.checkOpcionAdicional.isSelected();
+    }
+ 
+    
     private void esOpcionalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_esOpcionalActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_esOpcionalActionPerformed
@@ -157,6 +191,17 @@ public class VentanaPreguntaOpcional extends javax.swing.JInternalFrame {
         this.comboBoxOpciones.addItem(this.entryOpcion.getText());
         this.entryOpcion.setText(null);
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    
+    private void activarNumMAxCaracteresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_activarNumMAxCaracteresActionPerformed
+        boolean selecionado = this.activarNumMAxCaracteres.isSelected();
+        
+        if(selecionado){
+            this.NumMaxOpciones.setEnabled(true);
+        }else {
+            this.NumMaxOpciones.setEnabled(false);
+        }
+    }//GEN-LAST:event_activarNumMAxCaracteresActionPerformed
 
     /**
      * @param args the command line arguments
@@ -195,13 +240,13 @@ public class VentanaPreguntaOpcional extends javax.swing.JInternalFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JSpinner NumMaxOpciones;
+    private javax.swing.JCheckBox activarNumMAxCaracteres;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JCheckBox checkOpcionAdicional;
     private javax.swing.JComboBox comboBoxOpciones;
     private javax.swing.JTextField entryOpcion;
     private javax.swing.JTextField entryTituloPregunta;
     private javax.swing.JCheckBox esOpcional;
-    private javax.swing.JCheckBox jCheckBox1;
     private javax.swing.JCheckBox jCheckBox2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
