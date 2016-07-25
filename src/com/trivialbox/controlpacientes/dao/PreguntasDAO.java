@@ -283,6 +283,10 @@ public class PreguntasDAO {
             
             List<ObjectField> fieldsPregunta = Tools.getValues(pregunta, excludes);
             fieldsPregunta.addAll(getExtraFields(pregunta));
+            
+            String idPregunta = getIdPregunta(pregunta);
+            
+            fieldsPregunta.add(new ObjectField("idPregunta", idPregunta));
             dataBase.insert(
                     Tools.getObjectName(pregunta),
                     fieldsPregunta
@@ -317,7 +321,6 @@ public class PreguntasDAO {
     private List<ObjectField> getExtraFields(Pregunta pregunta) {
         ArrayList<ObjectField> extraFields = new ArrayList<>();
         extraFields.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
-        extraFields.add(new ObjectField("idPregunta", Integer.toString(pregunta.getIdPregunta())));
         return extraFields;
     }
 
@@ -360,5 +363,16 @@ public class PreguntasDAO {
         } else if (pregunta instanceof PreguntaOpcionMultiple) {
         }
         return excludes;
+    }
+
+    private String getIdPregunta(Pregunta pregunta) {
+        ArrayList<String> table = new ArrayList<>();
+        table.add("Pregunta");
+        ArrayList<ObjectField> temp = new ArrayList<>();
+        temp.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
+        temp.add(new ObjectField("titulo", pregunta.getTitulo()));
+
+        String idPregunta = dataBase.select(table, temp).getRow(0).getField(0);
+        return idPregunta;
     }
 }
