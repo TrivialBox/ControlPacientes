@@ -348,7 +348,7 @@ public class PreguntasDAO {
     private ArrayList<String> getExcludes(Pregunta pregunta) {
         ArrayList<String> excludes = new ArrayList<>();
         if (pregunta instanceof PreguntaNumerica) {
-            excludes.add("idPregunta");
+            // excludes.add("idPregunta");
         } else if (pregunta instanceof PreguntaTextual) {
             
         } else if (pregunta instanceof PreguntaBooleana) {

@@ -29,4 +29,8 @@ public class PreguntaHora extends Pregunta<Calendar, String> {
     protected boolean preguntaRespondida() {
         return this.respuesta != null;
     }
+
+    public void responder(String respuesta) {
+        this.respuesta = respuesta;
+    }
 }

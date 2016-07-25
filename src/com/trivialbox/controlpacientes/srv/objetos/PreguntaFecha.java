@@ -13,6 +13,11 @@ public class PreguntaFecha extends Pregunta<Calendar, String> {
     public void responder(Calendar respuesta) {
         this.respuesta = Tools.calendarToDateString(respuesta);
     }
+    
+    // Ya tocó
+    public void responder(String respuesta) {
+        this.respuesta= respuesta;
+    }
 
     @Override
     protected String respuesta() {
