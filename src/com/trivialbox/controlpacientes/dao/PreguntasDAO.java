@@ -80,7 +80,7 @@ public class PreguntasDAO {
     }
     
     private Pregunta getFromPreguntaTextual(int idEncuesta, int idPregunta) {
-        Pregunta pregunta;        
+        Pregunta pregunta;   
         TablaDB result = getPreguntaFromTable("PreguntaTextual", idEncuesta, idPregunta);
         pregunta = construirPreguntaTextual(result, 0);
         return pregunta;
@@ -94,7 +94,7 @@ public class PreguntasDAO {
     }
 
     private Pregunta getFromPreguntaFecha(int idEncuesta, int idPregunta) {
-        Pregunta pregunta;        
+        Pregunta pregunta;
         TablaDB result = getPreguntaFromTable("PreguntaFecha", idEncuesta, idPregunta);
         pregunta = construirPreguntaFecha(result, 0);
         return pregunta;
@@ -244,7 +244,29 @@ public class PreguntasDAO {
     }
     
     public void del(String nombreEncuesta, int idPregunta) {
-        // TODO Y si nos olvidamos de borrar las preguntas por ahora...
+        try {
+            Pregunta pregunta = get(nombreEncuesta, idPregunta);
+            
+            List<ObjectField> fields = getExtraFields(pregunta);
+            
+            dataBase.delete(
+                    "Opcion",
+                    fields
+            );
+            
+            dataBase.delete(
+                    Tools.getObjectName(pregunta),
+                    fields
+            );
+            
+            dataBase.delete(
+                    "Pregunta",
+                    fields
+            );
+            
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al eliminar pregunta." + ex.getMessage());
+        }
     }
 
     public Pregunta add(Pregunta pregunta) {
@@ -255,7 +277,7 @@ public class PreguntasDAO {
             );
             
             if (pregunta instanceof PreguntaOpcionMultiple)
-                throw new RuntimeException("Ups, aún no podemos hacer eso.");  // TODO
+                return addOpcionMultiple((PreguntaOpcionMultiple) pregunta);
             
             List<ObjectField> fieldsPregunta = Tools.getValues(pregunta, null);
             fieldsPregunta.addAll(getExtraFields(pregunta));
@@ -295,5 +317,29 @@ public class PreguntasDAO {
         extraFields.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
         extraFields.add(new ObjectField("idPregunta", Integer.toString(pregunta.getIdPregunta())));
         return extraFields;
+    }
+
+    private Pregunta addOpcionMultiple(PreguntaOpcionMultiple pregunta) {      
+        ArrayList<ObjectField> fieldsPregunta = new ArrayList<>(getExtraFields(pregunta));
+        fieldsPregunta.add(new ObjectField("numMaxSelecciones", Integer.toString(pregunta.getNumMaxSelecciones())));
+        fieldsPregunta.add(new ObjectField("tieneCampoAdicional", pregunta.tieneCampoAdicional() ? "1" : "0"));
+        
+        dataBase.insert(
+                "preguntaOpcionMultiple",
+                fieldsPregunta
+        );
+        
+        for (String opcion : pregunta.getOpciones()) {
+            ArrayList<ObjectField> fieldsOpcion = new ArrayList<>();
+            fieldsOpcion.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
+            fieldsOpcion.add(new ObjectField("idPregunta", Integer.toString(pregunta.getIdPregunta())));
+            fieldsOpcion.add(new ObjectField("nombre", opcion));
+
+            dataBase.insert(
+                    "Opcion",
+                    fieldsOpcion
+            );
+        }
+        return pregunta;
     }
 }
