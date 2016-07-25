@@ -55,7 +55,9 @@ public class Tools {
                 String value = obj == null ? "" : obj.toString();
                 
                 if (excludes == null || !excludes.contains(name)) {
-                    if (getBasicTypes().contains(type))
+                    if (type.equalsIgnoreCase("Boolean"))
+                        fields.add(new ObjectField(name, value.equalsIgnoreCase("true") ? "1" : "0"));
+                    else if (getBasicTypes().contains(type))
                         fields.add(new ObjectField(name, value));
                     else if (obj != null)
                         fields.addAll(getValues(obj, excludes));
