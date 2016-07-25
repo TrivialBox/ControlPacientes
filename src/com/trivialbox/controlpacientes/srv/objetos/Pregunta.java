@@ -1,6 +1,9 @@
 package com.trivialbox.controlpacientes.srv.objetos;
 
+import com.trivialbox.controlpacientes.dao.db.ObjectField;
 import com.trivialbox.controlpacientes.srv.exceptions.PreguntaNoRespondidaException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Clase base para preguntas
@@ -66,5 +69,14 @@ public abstract class Pregunta<O, R> {
     
     public final boolean estaRespondida() {
         return esOpcional || preguntaRespondida();
+    }
+
+    public List<ObjectField> getFieldsPregunta() {
+        List<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idEncuesta", Integer.toString(getIdEncuesta())));
+        fields.add(new ObjectField("idPregunta", Integer.toString(getIdPregunta())));
+        fields.add(new ObjectField("titulo", getTitulo()));
+        fields.add(new ObjectField("esOpcional", esOpcional() ? "1" : "0"));
+        return fields;
     }
 }

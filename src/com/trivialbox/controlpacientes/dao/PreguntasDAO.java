@@ -13,8 +13,10 @@ import com.trivialbox.controlpacientes.srv.objetos.PreguntaNumerica;
 import com.trivialbox.controlpacientes.srv.objetos.PreguntaOpcionMultiple;
 import com.trivialbox.controlpacientes.srv.objetos.PreguntaTextual;
 import com.trivialbox.controlpacientes.srv.objetos.Rango;
+import com.trivialbox.controlpacientes.srv.objetos.Tools;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.List;
 
 public class PreguntasDAO {
@@ -225,21 +227,6 @@ public class PreguntasDAO {
         return idEncuesta;
     }
     
-    public void del(String nombreEncuesta, int idPregunta) {
-    }
-
-    public Pregunta add(Pregunta pregunta) {
-        return null;
-    }
-
-    public Pregunta update(String nombreEncuesta, int idPregunta, Pregunta pregunta) {
-        return null;
-    }
-
-    public List<Pregunta> get() {
-        return null;
-    }
-
     private List<String> getOpciones(int idEncuesta, int idPregunta) {
         ArrayList<String> tabla = new ArrayList<>();
         tabla.add("Opcion");
@@ -257,4 +244,57 @@ public class PreguntasDAO {
         return opciones;
     }
     
+    public void del(String nombreEncuesta, int idPregunta) {
+        // TODO Y si nos olvidamos de borrar las preguntas por ahora...
+    }
+
+    public Pregunta add(Pregunta pregunta) {
+        try {
+            dataBase.insert(
+                    Pregunta.class.getSimpleName(),
+                    pregunta.getFieldsPregunta()
+            );
+            
+            if (pregunta instanceof PreguntaOpcionMultiple)
+                throw new RuntimeException("Ups, aún no podemos hacer eso.");  // TODO
+            
+            List<ObjectField> fieldsPregunta = Tools.getValues(pregunta, null);
+            fieldsPregunta.addAll(getExtraFields(pregunta));
+            dataBase.insert(
+                    Tools.getObjectName(pregunta),
+                    fieldsPregunta
+            );
+            
+            return pregunta;
+        } catch (Exception ex) {
+            throw new RuntimeException("Error al agregar pregunta." + ex.getMessage());
+        }
+    }
+
+    public Pregunta update(String nombreEncuesta, int idPregunta, Pregunta pregunta) {
+        // TODO Mejor seguimos haciendo otras cosas D:
+        return null;
+    }
+
+    public List<Pregunta> get(String nombreEncuesta) {
+        int idEncuesta = getIdEncuestaFromNombre(nombreEncuesta);
+        List<Pregunta> preguntas = new ArrayList<>();
+        ArrayList<String> table = new ArrayList<>();
+        table.add("Pregunta");
+        
+        ArrayList<ObjectField> fields = new ArrayList<>();
+        fields.add(new ObjectField("idEncuesta", Integer.toString(idEncuesta)));
+        
+        TablaDB result = dataBase.select(table, fields);
+        for (RowDB r : result)
+            preguntas.add(get(nombreEncuesta, Integer.parseInt(r.getField(0))));
+        return preguntas;
+    }
+
+    private List<ObjectField> getExtraFields(Pregunta pregunta) {
+        ArrayList<ObjectField> extraFields = new ArrayList<>();
+        extraFields.add(new ObjectField("idEncuesta", Integer.toString(pregunta.getIdEncuesta())));
+        extraFields.add(new ObjectField("idPregunta", Integer.toString(pregunta.getIdPregunta())));
+        return extraFields;
+    }
 }
