@@ -2,7 +2,7 @@ package com.trivialbox.controlpacientes.srv.objetos;
 
 import java.util.Calendar;
 
-public class PreguntaHora extends Pregunta<Calendar, String>{
+public class PreguntaHora extends Pregunta<Calendar, String> {
     
     private String respuesta = null;
 
