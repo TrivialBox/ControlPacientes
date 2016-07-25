@@ -43,6 +43,7 @@ public class AdministradorSRV {
         AdministradoresDAO.getInstance().add(administrador);
         return administrador;
     }
+    
     /**
      * 
      * @param cedula
