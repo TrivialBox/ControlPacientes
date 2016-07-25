@@ -5,16 +5,29 @@ import com.trivialbox.controlpacientes.srv.encuestaSrv.EncuestaSrv;
 import com.trivialbox.controlpacientes.srv.objetos.Encuesta;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Image;
 import java.util.List;
 import java.awt.event.ActionEvent;
+import java.awt.image.BufferedImage;
+import java.beans.PropertyVetoException;
+import java.io.File;
+import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.TimerTask;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
 
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 
 /**
@@ -22,17 +35,33 @@ import javax.swing.SwingUtilities;
  * @author root
  */
 public class VentanaAdministrador extends javax.swing.JFrame {
-    int posX = 10, posY = 100;
+    int posX = 5, posY = 115;
     List<JPanel> listaEncuestas = new ArrayList<>();
     EncuestaSrv encuestaSrv;
     VentanaPreguntas ventanaPreguntas;
+    public int actualizar = 0;
     /**
      * Creates new form VentanaAdministrador
      */
     public VentanaAdministrador() {
         initComponents();
         crearEncuetas();
+        agregarPanelIngreso();
+        
+        
     }
+    private void agregarPanelIngreso(){
+        VentanaEncabezadoAdministrador vA = new VentanaEncabezadoAdministrador();
+ 
+        this.jDesktopPane1.add(vA);
+        vA.setVisible(true);
+        try {
+            vA.setMaximum(true);
+        } catch (PropertyVetoException ex) {
+            Logger.getLogger(VentanaAdministrador.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     void crearEncuetas(){
         encuestaSrv = new EncuestaSrv();
         List<Encuesta> encuestas = encuestaSrv.obtenerEncuestas();
@@ -44,14 +73,14 @@ public class VentanaAdministrador extends javax.swing.JFrame {
             panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK),
                                                                 BorderFactory.createEmptyBorder(10, 15, 5, 15)));
             JLabel label1;
-            if(encuestas.get(a).getNombre().length() >= 10){
-                label1 = new JLabel(encuestas.get(a).getNombre().substring(0, 10)+"..");
+            if(encuestas.get(a).getNombre().length() >= 15){
+                label1 = new JLabel(encuestas.get(a).getNombre().substring(0, 15)+"..");
             }else {
                 label1 = new JLabel(encuestas.get(a).getNombre());
             }
             label1.setToolTipText(encuestas.get(a).getNombre());
             JLabel label = new JLabel(encuestas.get(a).getNombre());
-            panel.setBounds(posX, posY, 100, 70);
+            panel.setBounds(posX, posY, 100, 100);
             if(posX >400){
                 posX = 10;
                 posY = posY + 80;
@@ -60,33 +89,40 @@ public class VentanaAdministrador extends javax.swing.JFrame {
             }
             
             this.add(panel);
-            JButton boton = new JButton("Editar");
-            
-            boton.setSize(dimension);
+            JButton btnEditar = new JButton(" Editar ");
+            JButton btnAsiganr = new JButton("Asignar");
+            btnEditar.setSize(dimension);
 
 
-            boton.addActionListener((java.awt.event.ActionEvent evt) -> {
+            btnEditar.addActionListener((java.awt.event.ActionEvent evt) -> {
                 actionPerformedqq(evt,label.getText());
             });
             label.setBounds(a, a, 100, 30);
             panel.add(label1);
-            panel.add(boton);
+            panel.add(btnEditar);
+            panel.add(btnAsiganr);
+            actualizar++;
         }
     }
     private void agregarNuevaEncuesta(String nombreEncuesta){
-        JPanel panel = new JPanel();
+        encuestaSrv = new EncuestaSrv();
+        List<Encuesta> encuestas = encuestaSrv.obtenerEncuestas();
+        Dimension dimension = new Dimension(150, 30);
+
+         for(int a = actualizar; a < encuestas.size();a++){
+            JPanel panel = new JPanel();
             panel.setBorder(BorderFactory.createCompoundBorder(BorderFactory.createLineBorder(Color.BLACK),
                                                                 BorderFactory.createEmptyBorder(10, 15, 5, 15)));
             JLabel label1;
-            if(nombreEncuesta.length() >= 10){
-                label1 = new JLabel(nombreEncuesta.substring(0, 10)+"..");
+            if(encuestas.get(a).getNombre().length() >= 15){
+                label1 = new JLabel(encuestas.get(a).getNombre().substring(0, 15)+"..");
             }else {
-                label1 = new JLabel(nombreEncuesta);
+                label1 = new JLabel(encuestas.get(a).getNombre());
             }
-            label1.setToolTipText(nombreEncuesta);
-            JLabel label = new JLabel(nombreEncuesta);
-            panel.setBounds(posX, posY, 100, 70);
-            if(posX >300){
+            label1.setToolTipText(encuestas.get(a).getNombre());
+            JLabel label = new JLabel(encuestas.get(a).getNombre());
+            panel.setBounds(posX, posY, 100, 100);
+            if(posX >400){
                 posX = 10;
                 posY = posY + 80;
             }else{
@@ -94,14 +130,19 @@ public class VentanaAdministrador extends javax.swing.JFrame {
             }
             
             this.add(panel);
-            JButton boton = new JButton("Editar");
+            JButton btnEditar = new JButton(" Editar ");
+            JButton btnAsiganr = new JButton("Asignar");
+            btnEditar.setSize(dimension);
 
-            boton.addActionListener((java.awt.event.ActionEvent evt) -> {
+
+            btnEditar.addActionListener((java.awt.event.ActionEvent evt) -> {
                 actionPerformedqq(evt,label.getText());
             });
+            label.setBounds(a, a, 100, 30);
             panel.add(label1);
-            panel.add(boton);
-            System.out.println("agregando");
+            panel.add(btnEditar);
+            panel.add(btnAsiganr);
+        }
 
     }
     public void actionPerformedqq(ActionEvent e, String nombreEncuesta) {
@@ -112,43 +153,55 @@ public class VentanaAdministrador extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        entryNombreEncuesta = new javax.swing.JTextField();
-        btnCrearEncuesta = new javax.swing.JButton();
+        jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
+        jMenuItem3 = new javax.swing.JMenuItem();
         jSeparator1 = new javax.swing.JPopupMenu.Separator();
+        jMenuItem4 = new javax.swing.JMenuItem();
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("lISTA DE ENCUESTAS");
-
-        entryNombreEncuesta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                entryNombreEncuestaActionPerformed(evt);
-            }
-        });
-
-        btnCrearEncuesta.setText("Agregar");
-        btnCrearEncuesta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCrearEncuestaActionPerformed(evt);
-            }
-        });
+        javax.swing.GroupLayout jDesktopPane1Layout = new javax.swing.GroupLayout(jDesktopPane1);
+        jDesktopPane1.setLayout(jDesktopPane1Layout);
+        jDesktopPane1Layout.setHorizontalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 458, Short.MAX_VALUE)
+        );
+        jDesktopPane1Layout.setVerticalGroup(
+            jDesktopPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 108, Short.MAX_VALUE)
+        );
 
         jMenu1.setText("Herramientas");
 
-        jMenuItem1.setText("Crear Administrador");
+        jMenuItem1.setText("Registrar administrador");
         jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem1);
+
+        jMenuItem3.setText("Registrar paciente");
+        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem3ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem3);
         jMenu1.add(jSeparator1);
+
+        jMenuItem4.setText("Actualizar");
+        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem4ActionPerformed(evt);
+            }
+        });
+        jMenu1.add(jMenuItem4);
 
         jMenuItem2.setText("cerrar sesión");
         jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
@@ -169,46 +222,17 @@ public class VentanaAdministrador extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(entryNombreEncuesta, javax.swing.GroupLayout.DEFAULT_SIZE, 309, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(btnCrearEncuesta, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(jDesktopPane1)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(12, 12, 12)
-                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(entryNombreEncuesta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCrearEncuesta))
-                .addGap(155, 155, 155))
+                .addComponent(jDesktopPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 287, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnCrearEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCrearEncuestaActionPerformed
-        encuestaSrv = new EncuestaSrv();
-        encuestaSrv.agregarEncuesta(entryNombreEncuesta.getText(), "null");
-        agregarNuevaEncuesta(entryNombreEncuesta.getText());
-        this.update(this.getGraphics());
-        this.entryNombreEncuesta.setText(null);
-        
-        
-        
-    }//GEN-LAST:event_btnCrearEncuestaActionPerformed
-
-    private void entryNombreEncuestaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entryNombreEncuestaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_entryNombreEncuestaActionPerformed
 
     private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         LoginSrv.cerrarSesion();
@@ -219,6 +243,15 @@ public class VentanaAdministrador extends javax.swing.JFrame {
        agregarAdmin.setVisible(true);
        
     }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        VentanaAgregarPaciente ventanaAgregarPaciente = new VentanaAgregarPaciente();
+        ventanaAgregarPaciente.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        agregarNuevaEncuesta(null);
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -256,14 +289,14 @@ public class VentanaAdministrador extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnCrearEncuesta;
-    private javax.swing.JTextField entryNombreEncuesta;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenuItem jMenuItem4;
     private javax.swing.JPopupMenu.Separator jSeparator1;
     // End of variables declaration//GEN-END:variables
 }
