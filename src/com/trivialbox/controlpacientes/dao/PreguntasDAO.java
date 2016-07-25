@@ -16,7 +16,6 @@ import com.trivialbox.controlpacientes.srv.objetos.Rango;
 import com.trivialbox.controlpacientes.srv.objetos.Tools;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 
 public class PreguntasDAO {
